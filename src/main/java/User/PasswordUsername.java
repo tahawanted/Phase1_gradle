@@ -1,5 +1,6 @@
 package User;
 
+import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -43,7 +44,7 @@ class HashLib {
 }
 
 public class PasswordUsername {
-    static Logger main_logger = LoggingClass.getMainLoggerInstance();
+    private static Logger main_logger = LoggingClass.getMainLoggerInstance();
     static public String passwordFormat = "The password must contain lower case and upper " +
             "case\n english characters and must also include numbers. It must also be at least 8 characters long.";
 
@@ -108,7 +109,7 @@ public class PasswordUsername {
 
             user.remove("Password");
             user.put("Password", newPasswordHash);
-            Utility.FileFunctions.SaveJsonUserListArray(array);
+            Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
             main_logger.info("Password change successful.");
         } else {
             main_logger.info("Warning. Password incorrect. Password change failed.");

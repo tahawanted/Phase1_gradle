@@ -13,7 +13,7 @@ import java.util.logging.SimpleFormatter;
 public class LoggingClass {
     private static final Logger main_logger = Logger.getLogger("main_logger");
     private static final Logger user_logger = Logger.getLogger("user_logger");
-    static FileHandler fh, userFh;
+    private static FileHandler fh, userFh;
     static SimpleFormatter formatter = new SimpleFormatter();
     static {
         try {
@@ -43,10 +43,10 @@ public class LoggingClass {
         }
     }
     public static String returnUserLoggerPath(String username, long userID){
-        return Main_config_file.logFolder + "\\" + username + "-" + userID + ".log";
+        return Main_config_file.getLogFolder() + "\\" + username + "-" + userID + ".log";
     }
     public static String returnMainLoggerPath(){
-        return Main_config_file.logFolder + "\\mainlog" +
+        return Main_config_file.getLogFolder() + "\\mainlog" +
                 "_" + LocalDateTime.now().toString().substring(5,10) + "_"
                 + LocalDateTime.now().toString().substring(11,13) + "_"
                 + LocalDateTime.now().toString().substring(14,16) + ".log";

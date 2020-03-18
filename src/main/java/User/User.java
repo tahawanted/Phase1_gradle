@@ -2,6 +2,7 @@ package User;
 
 import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
+import Utility.FileFunctions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -69,20 +70,7 @@ public class User {
 
 
     public static JSONArray getUserArray() {
-        JSONArray array = null;
-        try (FileReader reader = new FileReader(Main_config_file.user_list_location)) {
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(reader);
-            array = (JSONArray) obj;
-            return array;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return array;
+        return FileFunctions.loadJsonArray(Main_config_file.getUser_list_location());
     }
     public static JSONObject getUserFromArray(String username, long userID) {
         JSONArray array = User.getUserArray();

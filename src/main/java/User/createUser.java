@@ -21,9 +21,8 @@ import static LoggingModule.LoggingClass.returnUserLoggerPath;
 
 
 public class createUser {
-    public static Scanner scanner = new Scanner(System.in);
-    static long userID = 0;
-    static Logger main_logger = LoggingClass.getMainLoggerInstance();
+    private static long userID = 0;
+    private static Logger main_logger = LoggingClass.getMainLoggerInstance();
 
     private static JSONArray assignUserID(){
 
@@ -68,7 +67,7 @@ public class createUser {
             e.printStackTrace();
         }
 
-        File file = new File(Main_config_file.user_list_location);
+        File file = new File(Main_config_file.getUser_list_location());
         boolean exists = file.exists();
 
         if (!exists) {
@@ -91,7 +90,7 @@ public class createUser {
 
 
         // write changes to file.
-        Utility.FileFunctions.SaveJsonUserListArray(array, file);
+        Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
     }
 }
 

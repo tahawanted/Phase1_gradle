@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class DeleteUser {
-    static Logger main_logger = LoggingClass.getMainLoggerInstance();
+    private static Logger main_logger = LoggingClass.getMainLoggerInstance();
     public static void deleteuser(String username, long userID, String password){
         // I HAVE NOT CHECKED TO  SEE IF THE USER IS ALREADY DELETED OR NOT AND HAVE ASSUMED THAT THIS WON'T HAPPEN
         String passwordIsOk = PasswordUsername.PasswordValidityCheck(username, userID, password);
@@ -27,7 +27,7 @@ public class DeleteUser {
             JSONObject userToDelete = User.getUserFromArray(array, username, userID);
             userToDelete.remove("Deleted At");
             userToDelete.put("Deleted At", LocalDateTime.now().toString());
-            Utility.FileFunctions.SaveJsonUserListArray(array);
+            Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
 
         }
     }
