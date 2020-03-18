@@ -1,11 +1,14 @@
 package Hero;
 
-public class Heros {
+public class Hero {
     private String name;
     private int heroLevel;
     private int cardsOwnedByHero;
     private String description;
-    public Heros(String name, String description) {
+    private int maxHealth;
+    private int currentHealth;
+    private int shield;
+    public Hero(String name, String description) {
         this.name = name;
         this.description = description;
         heroLevel = 1;

@@ -1,1 +1,26 @@
-[{"Username":"taha","UserID":0,"Wallet":50,"Password":"d2c13b18d53b2cd639fa6fe145802d75e05fe2cadf4578068cd14bb2d4b1b598","Created At":"2020-03-16T23:13:57.012380500","Deleted At":"2020-03-17T01:20:26.329920100"},{"Username":"what","UserID":1,"Wallet":50,"Password":"b9776d7ddf459c9ad5b0e1d6ac61e27befb5e99fd62446677600d7cacef544d0","Created At":"2020-03-16T23:17:37.962089","Deleted At":"None"}]
+[
+  {
+    "Username": "taha",
+    "UserID": 0,
+    "Wallet": 50,
+    "Password": "d2c13b18d53b2cd639fa6fe145802d75e05fe2cadf4578068cd14bb2d4b1b598",
+    "Created At": "2020-03-16T23:13:57.012380500",
+    "Deleted At": "2020-03-17T01:20:26.329920100"
+  },
+  {
+    "Username": "what",
+    "UserID": 1,
+    "Wallet": 50,
+    "Password": "b9776d7ddf459c9ad5b0e1d6ac61e27befb5e99fd62446677600d7cacef544d0",
+    "Created At": "2020-03-16T23:17:37.962089",
+    "Deleted At": "None"
+  },
+  {
+    "Username": "jsonTest",
+    "UserID": 2,
+    "Wallet": 50,
+    "Password": "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+    "Created At": "2020-03-18T20:56:21.075379",
+    "Deleted At": "None"
+  }
+]

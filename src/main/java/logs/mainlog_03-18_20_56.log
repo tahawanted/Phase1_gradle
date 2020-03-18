@@ -1,0 +1,6 @@
+Mar 18, 2020 8:56:21 PM User.createUser assignUserID
+INFO: Assigning userID 2
+Mar 18, 2020 8:56:21 PM User.createUser createAUser
+INFO: Creating user. Username: jsonTest
+Mar 18, 2020 8:56:21 PM User.createUser createAUser
+INFO: Creating user log

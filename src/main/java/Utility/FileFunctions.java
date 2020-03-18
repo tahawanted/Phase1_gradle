@@ -2,6 +2,10 @@ package Utility;
 
 import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class FileFunctions {
+
     public static void replaceLine(String username, long userID, String oldLineRegEx, String newLine){
         //Instantiating the File class
         String filePath = LoggingClass.returnUserLoggerPath(username, userID);
@@ -46,6 +51,19 @@ public class FileFunctions {
         }
     }
     public static void saveJsonArray(JSONArray array, String fileLocation){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(array.toJSONString());
+        String prettyJsonString = gson.toJson(je);
+
+        try {
+            FileWriter writer = new FileWriter(fileLocation);
+            writer.append(prettyJsonString);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*
         File file = new File(fileLocation);
         try {
             FileWriter fr = new FileWriter(file);
@@ -56,6 +74,8 @@ public class FileFunctions {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+         */
     }
     public static JSONArray loadJsonArray(String fileLocation){
         JSONArray array = null;

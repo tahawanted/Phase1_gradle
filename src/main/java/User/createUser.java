@@ -25,7 +25,6 @@ public class createUser {
     private static Logger main_logger = LoggingClass.getMainLoggerInstance();
 
     private static JSONArray assignUserID(){
-
         JSONArray array = User.getUserArray();
         JSONObject temp_user = (JSONObject) array.get(array.size() - 1);
         userID = (long) temp_user.get("UserID") + 1;
@@ -56,11 +55,11 @@ public class createUser {
         }
     }
 
-
     public static void createAUser(String username, String password) {
         JSONObject user = new JSONObject();
         JSONArray array = null;
         // Replace the user password with its hash.
+
         try {
             password = HashLib.toHexString(HashLib.getSHA(password));
         } catch (NoSuchAlgorithmException e) {

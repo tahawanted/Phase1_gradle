@@ -1,5 +1,7 @@
 package Card;
 
+import org.json.simple.JSONObject;
+
 interface playable{}
 interface vulnerable{}
 interface battlecry{}
@@ -13,6 +15,7 @@ interface discover{}
 interface reborn{}
 interface lifeSteal{}
 interface restore{}
+interface giveLife{}
 interface inspire{}
 interface divineShield{}
 interface windFury{}
@@ -30,6 +33,9 @@ public class Cards{
         private String rarity;
         private String type;
         private String description;
+        /*
+         ADD ANY NEW VARIABLE TO THE JSON OBJECT AS WELL
+         */
         card(String name, int mana, String heroClass, String rarity, String type, String description){
             this.name = name;
             setMana(mana);
@@ -43,7 +49,7 @@ public class Cards{
             this.mana = mana;
         }
         private void setRarity(String rarity){
-            assert rarity.equals("Common") || rarity.equals("rare") || rarity.equals("epic")
+            assert rarity.equals("Common") || rarity.equals("Rare") || rarity.equals("Epic")
                     || rarity.equals("Legendary");
             this.rarity = rarity;
         }
@@ -53,10 +59,9 @@ public class Cards{
         }
         private void setHeroClass(String heroClass){
             assert heroClass.equals("Mage") || heroClass.equals("Rogue") || heroClass.equals("Warlock")
-                    || heroClass.equals("netrual");
+                    || heroClass.equals("Neutral");
             this.heroClass = heroClass;
         }
-
         public String getName() {
             return name;
         }
@@ -80,14 +85,27 @@ public class Cards{
         public String getDescription() {
             return description;
         }
+        public JSONObject getCardJsonObject(){
+            JSONObject cardObject = new JSONObject();
+            cardObject.put("name", name);
+            cardObject.put("mana", mana);
+            cardObject.put("heroClass", heroClass);
+            cardObject.put("rarity", rarity);
+            cardObject.put("type", type);
+            cardObject.put("description", description);
+            return cardObject;
+        }
     }
 
     public static class minion extends card {
         private int health;
         private int attackPower;
-        //private boolean battlecry, charge, deathRattle, taunt, freeze, discover, stealth;
+        /*
+         ADD ANY NEW VARIABLE TO THE JSON OBJECT AS WELL
+         */
         minion(String name, int mana, int health, int attackPower, String heroClass, String rarity, String description){
             super(name, mana, heroClass, rarity, "Minion", description);
+
             setHealth(health);
             setAttackPower(attackPower);
         }
@@ -107,10 +125,24 @@ public class Cards{
         public int getAttackPower() {
             return attackPower;
         }
+
+        @Override
+        public JSONObject getCardJsonObject() {
+            JSONObject cardObject = super.getCardJsonObject();
+            cardObject.put("health", health);
+            cardObject.put("attackPower", attackPower);
+            return cardObject;
+        }
     }
     public static class spell extends card{
         spell(String name, int mana, String heroClass, String rarity, String description){
             super(name, mana, heroClass, rarity, "Spell", description);
+        }
+
+        @Override
+        public JSONObject getCardJsonObject() {
+            JSONObject cardObject = super.getCardJsonObject();
+            return cardObject;
         }
     }
     public static class quest extends card{
@@ -118,6 +150,11 @@ public class Cards{
             super(name, mana, heroClass, rarity, "Quest", description);
         }
 
+        @Override
+        public JSONObject getCardJsonObject() {
+            JSONObject cardObject = super.getCardJsonObject();
+            return cardObject;
+        }
     }
     public static class weapon extends card{
         private int durability, attackPower;
@@ -133,6 +170,13 @@ public class Cards{
         private void setAttackPower(int attackPower){
             assert attackPower > 0;
             this.attackPower = attackPower;
+        }
+        @Override
+        public JSONObject getCardJsonObject() {
+            JSONObject cardObject = super.getCardJsonObject();
+            cardObject.put("durability", durability);
+            cardObject.put("attackPower", attackPower);
+            return cardObject;
         }
     }
 
