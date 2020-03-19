@@ -22,6 +22,7 @@ public class SerializationFunctions {
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
         main_logger.info("Object has been serialized");
     }
@@ -39,8 +40,10 @@ public class SerializationFunctions {
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
         main_logger.info("User object deserialized.");
         return returnObject;
@@ -59,8 +62,10 @@ public class SerializationFunctions {
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
         main_logger.info("User object deserialized.");
         return returnObject;

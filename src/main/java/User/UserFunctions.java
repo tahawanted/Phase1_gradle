@@ -11,21 +11,21 @@ import java.util.logging.Logger;
 public class UserFunctions {
     private static Logger main_logger = LoggingClass.getMainLoggerInstance();
     // FOR LOGIN, CHECK THAT THE USER IS NOT DELETED.
-    public static boolean userLogIn(String username, String password){
+    public static User userLogIn(String username, String password){
         long userID = findUserID(username);
         if (userID == -1){
-            main_logger.info("Error. No such user or user has been deleted.");
-            return false;
+            main_logger.info("Error. No such user; or user has been deleted.");
+            return null;
         }
         String passwordvalid = PasswordUsername.PasswordValidityCheck(username, userID, password);
         if (passwordvalid.equals("Incorrect")){
             main_logger.info("Password incorrect.");
-            return false;
+            return null;
         }
         if (passwordvalid.equals("UserNonExistent")){
             main_logger.info("What the hell!? I found this user's userID through searching the" +
                     " user list but now I couldn't find it.");
-            return false;
+            return null;
         }
         // instantiate the user logger.
         Logger user_logger = LoggingClass.getUserLogger(username, userID);
@@ -33,16 +33,11 @@ public class UserFunctions {
             user_logger.info("Log in.");
         } catch (Exception e){
             main_logger.info("The user logger could not be instantiated.");
-            return false;
+            main_logger.info(e.getMessage());
+            return null;
         }
-
-        //SAVE USER LAST LOG IN TIME.
         //LOAD THE GOD DAMN USER DATA.
-
-
-
-
-        return true;
+        return User.deserializeUser(username, userID);
     }
     public static void userLogOut(String username){
         Logger user_logger = LoggingClass.getUserLogger();

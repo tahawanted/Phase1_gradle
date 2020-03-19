@@ -10,16 +10,17 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import static Utility.SerializationFunctions.Serialize;
+import static Utility.SerializationFunctions.userDeserialize;
 
 public class User implements Serializable {
     private String username;
-    private int userID;
+    private long userID;
     private String hashedPassword;
     private int walletBalance;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private int currentHeroIndex;
-    Logger main_logger = LoggingClass.getMainLoggerInstance();
-    User(String username, int userID, String hashedPassword){
+    transient Logger main_logger = LoggingClass.getMainLoggerInstance();
+    User(String username, long userID, String hashedPassword){
         this.username = username;
         this.userID = userID;
         this.hashedPassword = hashedPassword;
@@ -69,8 +70,8 @@ public class User implements Serializable {
     public void serializeUser(){
         Serialize(this, Main_config_file.returnUserSaveDataLocation(username, userID));
     }
-    public static User deserializeUser(String username, int userID){
-        User userObject = deserializeUser(username, userID);
+    public static User deserializeUser(String username, long userID){
+        User userObject = userDeserialize(Main_config_file.returnUserSaveDataLocation(username, userID));
         return userObject;
     }
 
@@ -82,4 +83,8 @@ public class User implements Serializable {
         assert walletBalance >= 0;
         this.walletBalance = walletBalance;
     }
+    public String getCurrentHeroName(){
+        return heroes.get(currentHeroIndex).getName();
+    }
+    public
 }

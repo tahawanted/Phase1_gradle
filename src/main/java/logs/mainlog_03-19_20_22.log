@@ -1,0 +1,16 @@
+Mar 19, 2020 8:22:43 PM User.PasswordUsername CheckUsernameValidity
+INFO: Error. The current username is taken. Chose another username
+Mar 19, 2020 8:23:00 PM User.createUser assignUserID
+INFO: Assigning userID 4
+Mar 19, 2020 8:23:00 PM User.createUser createAUser
+INFO: Creating user. Username: Fatemeh
+Mar 19, 2020 8:23:00 PM User.createUser createAUser
+INFO: Creating user log
+Mar 19, 2020 8:23:00 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 19, 2020 8:23:00 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 19, 2020 8:23:36 PM CLI.CLI main
+INFO: Exiting
+Mar 19, 2020 8:23:36 PM CLI.CLI main
+INFO: null

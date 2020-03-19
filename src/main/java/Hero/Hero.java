@@ -8,15 +8,16 @@ import Utility.FileFunctions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import static Utility.SerializationFunctions.cardDeserialize;
 
-public class Hero {
+public class Hero implements Serializable {
     private String name;
     private int heroLevel;
-    private int cardsOwnedByHero;
+    private int numberOfCardsOwnedByHero;
     private String description;
     private int maxHealth;
     private int currentHealth;
@@ -28,12 +29,12 @@ public class Hero {
     // special cards.
     private ArrayList<String> availableCards = new ArrayList<>(); // Cards open for the current hero.
     private JSONObject deckCards = new JSONObject();
-    private Logger main_logger = LoggingClass.getMainLoggerInstance();
+    transient private Logger main_logger = LoggingClass.getMainLoggerInstance();
     public Hero(String name, String description, boolean setAvailableCardsDefault) {
         this.name = name;
         this.description = description;
         heroLevel = 1;
-        cardsOwnedByHero = 10;
+        numberOfCardsOwnedByHero = 10;
         setHealth();
         setAllCards();
         if (setAvailableCardsDefault) {
@@ -60,11 +61,7 @@ public class Hero {
         if(deckCards.get(cardName) == null) return 0;
         return (int) deckCards.get(cardName);
     }
-    public ArrayList<String> getComplementAvailableCards(){
-        ArrayList<String> complementAvailable = new ArrayList<>(allCards);
-        complementAvailable.removeAll(availableCards);
-        return complementAvailable;
-    }
+
 
     public boolean buyCard(String cardName, User user){
         // The current implementation uses the fact that complement cards are created when this command is called
@@ -228,15 +225,12 @@ public class Hero {
     public String getName() {
         return name;
     }
-
     public int getHeroLevel() {
         return heroLevel;
     }
-
-    public int getCardsOwnedByHero() {
-        return cardsOwnedByHero;
+    public int getNumberOfCardsOwnedByHero() {
+        return numberOfCardsOwnedByHero;
     }
-
     public String getDescription() {
         return description;
     }
@@ -246,8 +240,13 @@ public class Hero {
     public ArrayList<String> getAvailableCards() {
         return availableCards;
     }
-
     public JSONObject getDeckCards() {
         return deckCards;
     }
+    public ArrayList<String> getComplementAvailableCards(){
+        ArrayList<String> complementAvailable = new ArrayList<>(allCards);
+        complementAvailable.removeAll(availableCards);
+        return complementAvailable;
+    }
+
 }

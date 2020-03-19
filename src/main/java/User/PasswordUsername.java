@@ -5,6 +5,7 @@ import LoggingModule.LoggingClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -53,6 +54,7 @@ public class PasswordUsername {
             hashedPassword = HashLib.toHexString(HashLib.getSHA(password));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
         JSONArray array = UserFunctions.getUserArray();
         for (int i=0; i<array.size(); i++){
@@ -100,6 +102,7 @@ public class PasswordUsername {
                 newPasswordHash = HashLib.toHexString(HashLib.getSHA(newPassword));
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
+                main_logger.info(e.getMessage());
             }
 
             String newLine = "Password: " + newPasswordHash;
@@ -116,12 +119,15 @@ public class PasswordUsername {
 
     }
     public static boolean CheckUsernameValidity(String username){
-        JSONArray array = UserFunctions.getUserArray();
-        for(int i = 0; i<array.size(); i++){
-            JSONObject temp_user = (JSONObject) array.get(i);
-            if(temp_user.get("Username").equals(username) && temp_user.get("Deleted At").equals("None")){
-                main_logger.info("Error. The current username is taken. Chose another username");
-                return false;
+        File file = new File(Main_config_file.getUser_list_location());
+        if(file.exists()) {
+            JSONArray array = UserFunctions.getUserArray();
+            for (int i = 0; i < array.size(); i++) {
+                JSONObject temp_user = (JSONObject) array.get(i);
+                if (temp_user.get("Username").equals(username) && temp_user.get("Deleted At").equals("None")) {
+                    main_logger.info("Error. The current username is taken. Chose another username");
+                    return false;
+                }
             }
         }
         return true;

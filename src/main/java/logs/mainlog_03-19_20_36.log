@@ -1,0 +1,20 @@
+Mar 19, 2020 8:36:27 PM User.PasswordUsername CheckUsernameValidity
+INFO: Error. The current username is taken. Chose another username
+Mar 19, 2020 8:36:39 PM User.createUser assignUserID
+INFO: Assigning userID 1
+Mar 19, 2020 8:36:39 PM User.createUser createAUser
+INFO: Creating user. Username: Taha
+Mar 19, 2020 8:36:39 PM User.createUser createAUser
+INFO: Creating user log
+Mar 19, 2020 8:36:39 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 19, 2020 8:36:39 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 19, 2020 8:36:39 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 19, 2020 8:37:20 PM CLI.CLI main
+INFO: Exiting
+Mar 19, 2020 8:37:20 PM CLI.CLI main
+INFO: null
+Mar 19, 2020 8:37:20 PM CLI.CLI main
+INFO: Ran into this error whilst trying to exit user_logger. It has probably been closed beforehand.

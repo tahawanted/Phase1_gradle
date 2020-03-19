@@ -1,0 +1,14 @@
+Mar 19, 2020 8:37:54 PM User.createUser createAUser
+INFO: Assigning userID 0
+Mar 19, 2020 8:37:54 PM User.createUser createAUser
+INFO: Creating user. Username: Taha
+Mar 19, 2020 8:37:54 PM User.createUser createAUser
+INFO: Creating user log
+Mar 19, 2020 8:37:54 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 19, 2020 8:37:54 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 19, 2020 8:37:55 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 19, 2020 8:37:55 PM CLI.CLI main
+INFO: The current Balance of the user100

@@ -2,6 +2,7 @@ package CLI;
 
 import LoggingModule.LoggingClass;
 import User.PasswordUsername;
+import User.User;
 import User.createUser;
 
 import java.util.Scanner;
@@ -68,6 +69,7 @@ public class CLI {
         followedPath.push(locations.gameEntry);
         String  password;
         boolean []shouldBreak = {false};
+        User currentUser = null;
 
         System.out.println("\t\t\t\t\tWelcome to my Hearthstone." +
                 "\n Sorry for the inconvenience that you are forced to work" +
@@ -77,6 +79,10 @@ public class CLI {
                 "\nIf you already have an account, enter y, otherwise enter n:");
 
         try {
+
+            // HELP is not implemented
+
+
             outer: while (true) {
                 switch (followedPath.peek()){
                     case preGameEntry:
@@ -84,11 +90,11 @@ public class CLI {
                     case gameEntry:
                         command_to_handle = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
-                        if (command_to_handle.equals('n') || command_to_handle.equals("no")
+                        if (command_to_handle.equals("n") || command_to_handle.equals("no")
                                 || command_to_handle.equals("No") || command_to_handle.equals("N")){
                             followedPath.push(locations.createUser);
                         }
-                        else if (command_to_handle.equals('y') || command_to_handle.equals("Y")
+                        else if (command_to_handle.equals("y") || command_to_handle.equals("Y")
                                 || command_to_handle.equals("Yes") || command_to_handle.equals("yes")){
                             followedPath.push(locations.enterCredentials);
                         }
@@ -106,11 +112,12 @@ public class CLI {
                         System.out.println("Password:");
                         password = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
-                        boolean logInStatus = userLogIn(username, password);
-                        if (logInStatus) {
+                        currentUser = userLogIn(username, password);
+                        if (currentUser != null) {
                             main_logger.info("User log in successful. Welcome");
                             followedPath.pop();
                             followedPath.push(locations.userPanel);
+
                         } else {
                             System.out.println("Log in unsuccessful. Try again.");
                             break;
@@ -134,10 +141,14 @@ public class CLI {
                             if (passwordFormatCheck) {
                                 followedPath.pop();
                                 followedPath.push(locations.userPanel);
-                                createUser.createAUser(username, password);
+                                currentUser = createUser.createAUser(username, password);
                                 System.out.println("Password accepted. Welcome to my Hearthstone.");
+                                break;
                             }
+                            password = readALine(scanner, followedPath, shouldBreak);
+                            if (shouldBreak[0]) break;
                         }
+                        main_logger.info("The current Balance of the user " + currentUser.getWalletBalance());
                         break;
                     case userPanel:
                 }

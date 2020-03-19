@@ -47,10 +47,11 @@ public class createUser {
              */
         } catch (IOException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
     }
 
-    public static void createAUser(String username, String password) {
+    public static User createAUser(String username, String password) {
         JSONObject user = new JSONObject();
         JSONArray array = null;
         // Replace the user password with its hash.
@@ -59,6 +60,7 @@ public class createUser {
             password = HashLib.toHexString(HashLib.getSHA(password));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
 
         File file = new File(Main_config_file.getUser_list_location());
@@ -81,10 +83,14 @@ public class createUser {
         array.add(user);
         main_logger.info("Creating user log");
         createUserLog(username, userID, password, LocalDateTime.now().toString());
-
+        main_logger.info("Creating user class instance");
+        User newUser = new User(username, userID, password);
+        main_logger.info("User class instantiated. Serializing");
+        newUser.serializeUser();
 
         // write changes to file.
         Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
+        return newUser;
     }
 }
 

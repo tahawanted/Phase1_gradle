@@ -16,7 +16,6 @@ public class InitiateCards {
     public static void main(String[] args) {
         String []rarity = {"Common", "Rare", "Epic", "Legendary"};
         String []heroClass = {"Neutral", "Mage", "Rogue", "Warlock"};
-        JSONObject tempCardObject;
         JSONArray cardArray = new JSONArray();
         ArrayList<Cards.card> neutralCards = new ArrayList<>();
         ArrayList<Cards.card> mageCards = new ArrayList<>();

@@ -1,0 +1,18 @@
+Mar 19, 2020 8:35:26 PM User.createUser createAUser
+INFO: Assigning userID 0
+Mar 19, 2020 8:35:26 PM User.createUser createAUser
+INFO: Creating user. Username: taha
+Mar 19, 2020 8:35:26 PM User.createUser createAUser
+INFO: Creating user log
+Mar 19, 2020 8:35:26 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 19, 2020 8:35:26 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 19, 2020 8:35:26 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 19, 2020 8:36:18 PM CLI.CLI main
+INFO: Exiting
+Mar 19, 2020 8:36:18 PM CLI.CLI main
+INFO: null
+Mar 19, 2020 8:36:18 PM CLI.CLI main
+INFO: Ran into this error whilst trying to exit user_logger. It has probably been closed beforehand.

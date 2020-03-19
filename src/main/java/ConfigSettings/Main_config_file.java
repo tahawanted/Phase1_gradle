@@ -16,7 +16,7 @@ public class Main_config_file {
         return gameBaseCardSaveLocation;
     }
 
-    public static String returnUserSaveDataLocation(String username, int userID){
+    public static String returnUserSaveDataLocation(String username, long userID){
         return getUserBaseSaveLocation() + "\\" + username + "-" + userID + ".ser";
     }
     public static String returnCardSaveDataLocation(String cardName){

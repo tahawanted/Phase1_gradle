@@ -22,6 +22,7 @@ public class LoggingClass {
             fh.setFormatter(formatter);
         } catch (IOException e) {
             e.printStackTrace();
+            main_logger.info(e.getMessage());
         }
     }
     private LoggingClass(){}
@@ -35,6 +36,7 @@ public class LoggingClass {
                 user_logger.info("Created current user's logger.");
             } catch (IOException e) {
                 e.printStackTrace();
+                main_logger.info(e.getMessage());
             }
             return user_logger;
         } else {

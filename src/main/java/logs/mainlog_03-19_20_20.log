@@ -1,0 +1,19 @@
+Mar 19, 2020 8:20:35 PM User.PasswordUsername PasswordFormatCheck
+INFO: Incorrect password format. The password must contain lower case and upper case
+ english characters and must also include numbers. It must also be at least 8 characters long.
+Mar 19, 2020 8:21:03 PM User.createUser assignUserID
+INFO: Assigning userID 3
+Mar 19, 2020 8:21:03 PM User.createUser createAUser
+INFO: Creating user. Username: fatemeh
+Mar 19, 2020 8:21:03 PM User.createUser createAUser
+INFO: Creating user log
+Mar 19, 2020 8:21:03 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 19, 2020 8:21:03 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 19, 2020 8:22:14 PM CLI.CLI main
+INFO: Exiting
+Mar 19, 2020 8:22:14 PM CLI.CLI main
+INFO: null
+Mar 19, 2020 8:22:14 PM CLI.CLI main
+INFO: Ran into this error whilst trying to exit user_logger. It has probably been closed beforehand.
