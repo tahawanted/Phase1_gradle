@@ -5,9 +5,7 @@ import LoggingModule.LoggingClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class DeleteUser {
@@ -23,8 +21,8 @@ public class DeleteUser {
             Utility.FileFunctions.replaceLine(username, userID, oldLine, newLine);
 
             // Now I must also change the status in userList
-            JSONArray array = User.getUserArray();
-            JSONObject userToDelete = User.getUserFromArray(array, username, userID);
+            JSONArray array = UserFunctions.getUserArray();
+            JSONObject userToDelete = UserFunctions.getUserFromArray(array, username, userID);
             userToDelete.remove("Deleted At");
             userToDelete.put("Deleted At", LocalDateTime.now().toString());
             Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());

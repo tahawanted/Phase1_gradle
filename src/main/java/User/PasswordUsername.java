@@ -5,12 +5,10 @@ import LoggingModule.LoggingClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.swing.text.Utilities;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 
@@ -56,7 +54,7 @@ public class PasswordUsername {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        JSONArray array = User.getUserArray();
+        JSONArray array = UserFunctions.getUserArray();
         for (int i=0; i<array.size(); i++){
             JSONObject temp_user = (JSONObject) array.get(i);
             if (temp_user.get("Username").equals(username) && (((long)temp_user.get("UserID")) == userID)){
@@ -94,8 +92,8 @@ public class PasswordUsername {
     public static void ChangePassword(String username, long userID, String currentPassword, String newPassword){
         String passwordValidity = PasswordValidityCheck(username, userID, currentPassword);
         if (passwordValidity.equals("Correct")){
-            JSONArray array = User.getUserArray();
-            JSONObject user = User.getUserFromArray(array, username, userID);
+            JSONArray array = UserFunctions.getUserArray();
+            JSONObject user = UserFunctions.getUserFromArray(array, username, userID);
             String oldLine = "Password:.*";
             String newPasswordHash = null;
             try {
@@ -118,7 +116,7 @@ public class PasswordUsername {
 
     }
     public static boolean CheckUsernameValidity(String username){
-        JSONArray array = User.getUserArray();
+        JSONArray array = UserFunctions.getUserArray();
         for(int i = 0; i<array.size(); i++){
             JSONObject temp_user = (JSONObject) array.get(i);
             if(temp_user.get("Username").equals(username) && temp_user.get("Deleted At").equals("None")){

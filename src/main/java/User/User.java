@@ -1,110 +1,85 @@
 package User;
 
 import ConfigSettings.Main_config_file;
+import Hero.Hero;
 import LoggingModule.LoggingClass;
-import Utility.FileFunctions;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class User {
-    static Logger main_logger = LoggingClass.getMainLoggerInstance();
-    // FOR LOGIN, CHECK THAT THE USER IS NOT DELETED.
-    public static boolean userLogIn(String username, String password){
-        long userID = findUserID(username);
-        if (userID == -1){
-            main_logger.info("Error. No such user or user has been deleted.");
-            return false;
-        }
-        String passwordvalid = PasswordUsername.PasswordValidityCheck(username, userID, password);
-        if (passwordvalid.equals("Incorrect")){
-            main_logger.info("Password incorrect.");
-            return false;
-        }
-        if (passwordvalid.equals("UserNonExistent")){
-            main_logger.info("What the hell!? I found this user's userID through searching the" +
-                    " user list but now I couldn't find it.");
-            return false;
-        }
-        // instantiate the user logger.
-        Logger user_logger = LoggingClass.getUserLogger(username, userID);
-        try {
-            user_logger.info("Log in.");
-        } catch (Exception e){
-            main_logger.info("The user logger could not be instantiated.");
-            return false;
-        }
+import static Utility.SerializationFunctions.Serialize;
 
-        //SAVE USER LAST LOG IN TIME.
-        //LOAD THE GOD DAMN USER DATA.
-
-
-
-
-        return true;
+public class User implements Serializable {
+    private String username;
+    private int userID;
+    private String hashedPassword;
+    private int walletBalance;
+    private ArrayList<Hero> heroes = new ArrayList<>();
+    private int currentHeroIndex;
+    Logger main_logger = LoggingClass.getMainLoggerInstance();
+    User(String username, int userID, String hashedPassword){
+        this.username = username;
+        this.userID = userID;
+        this.hashedPassword = hashedPassword;
+        walletBalance = 100;
+        heroes.add(new Hero("Mage", "The sorceress of hearthstone. At her hand, all non-mage spells " +
+                "cost 2 mana less.",true));
+        heroes.add(new Hero("Rogue", "The thief of these wastelands. All non-neutral and non-rogue " +
+                "cards cost 2 less for her.", true));
+        heroes.add(new Hero("Warlock", "The sacrificing demon around here. He will sacrifice cards " +
+                "and health points in order to win. The gods have gifted him with 5 more health points",
+                true));
+        currentHeroIndex = 0;
     }
-    public static void userLogOut(String username){
-        Logger user_logger = LoggingClass.getUserLogger();
-        user_logger.info("Log out at user request.");
-        // SAVE THE USER DATA. ALSO SAVE THE LOG OUT TIME.
-
-        LoggingClass.closeUserLogger();
-    }
-
-    public static long findUserID(String username){
-        JSONArray array = getUserArray();
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject temp_user = (JSONObject) array.get(i);
-            if (temp_user.get("Username").equals(username) && temp_user.get("Deleted At").equals("None")) {
-                return (long)temp_user.get("UserID");
-            }
-        }
-        return -1;
-    }
-
-
-
-
-
-
-    public static JSONArray getUserArray() {
-        return FileFunctions.loadJsonArray(Main_config_file.getUser_list_location());
-    }
-    public static JSONObject getUserFromArray(String username, long userID) {
-        JSONArray array = User.getUserArray();
-        JSONObject result = null;
-        boolean flag = false;
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject temp_user = (JSONObject) array.get(i);
-            if (temp_user.get("Username").equals(username) && (((long) temp_user.get("UserID")) == userID)
-                    && temp_user.get("Deleted At").equals("None")) {
-                flag = true;
-                result = (JSONObject) array.get(i);
+    public void changeHero(String heroName){
+        int index = -1;
+        for (int i = 0; i<heroes.size(); i++){
+            if (heroes.get(i).getName().equals(heroName)) {
+                index = i;
                 break;
             }
         }
-        if (!flag) main_logger.info("Error. Could not find the user in the user list.");
-        return result;
-    }
-    public static JSONObject getUserFromArray(JSONArray array, String username, long userID) {
-        JSONObject result = null;
-        boolean flag = false;
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject temp_user = (JSONObject) array.get(i);
-            if (temp_user.get("Username").equals(username) && (((long) temp_user.get("UserID")) == userID)
-                    && temp_user.get("Deleted At").equals("None")) {
-                flag = true;
-                result = (JSONObject) array.get(i);
-                break;
-            }
+        if (index == -1) {
+            main_logger.info("Error. The provided hero name is incorrect.");
+            return;
         }
-        if (!flag) main_logger.info("Error. Could not find the user in the user list.");
-        return result;
+        if (currentHeroIndex == index) {
+            main_logger.info("Error/Warning. The provided hero is already selected. Returning.");
+            return;
+        }
+        currentHeroIndex = index;
+        main_logger.info("Successfully changed hero to " + heroes.get(index).getName());
+    }
+
+    public boolean buyCard(String cardName){
+        return heroes.get(currentHeroIndex).buyCard(cardName, this);
+    }
+    public boolean sellCard(String cardName){
+        return heroes.get(currentHeroIndex).sellCard(cardName, this);
+    }
+    public boolean addToDeck(String cardName){
+        return heroes.get(currentHeroIndex).addToDeck(cardName);
+    }
+    public boolean removeFromDeck(String cardName){
+        return heroes.get(currentHeroIndex).removeFromDeck(cardName);
+    }
+
+    public void serializeUser(){
+        Serialize(this, Main_config_file.returnUserSaveDataLocation(username, userID));
+    }
+    public static User deserializeUser(String username, int userID){
+        User userObject = deserializeUser(username, userID);
+        return userObject;
+    }
+
+    public int getWalletBalance() {
+        return walletBalance;
+    }
+
+    public void setWalletBalance(int walletBalance) {
+        assert walletBalance >= 0;
+        this.walletBalance = walletBalance;
     }
 }

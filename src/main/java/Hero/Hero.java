@@ -1,14 +1,17 @@
 package Hero;
 
+import Card.Cards;
 import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
+import User.User;
 import Utility.FileFunctions;
-import com.google.gson.JsonArray;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+
+import static Utility.SerializationFunctions.cardDeserialize;
 
 public class Hero {
     private String name;
@@ -63,7 +66,7 @@ public class Hero {
         return complementAvailable;
     }
 
-    public boolean buyCard(String cardName){
+    public boolean buyCard(String cardName, User user){
         // The current implementation uses the fact that complement cards are created when this command is called
         // and using this, prevents buying cards already in you available cards
          if (!cardInAllCards(cardName)){
@@ -75,15 +78,21 @@ public class Hero {
             return false;
         }
 
+        Cards.card tempCard = cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName));
         // CHECK WALLET BALANCE
-
+        int price = tempCard.getPrice();
+        int currentBalance = user.getWalletBalance();
+        if (price > currentBalance){
+            main_logger.info("Error. Insufficient balance");
+            return false;
+        }
         // If wallet balance is also ok, reduce the card cost from the balance
-
+        user.setWalletBalance(currentBalance - price);
         availableCards.add(cardName);
         main_logger.info("Purchase successful. Card added to your collection.");
         return true;
     }
-    public boolean sellCard(String cardName){
+    public boolean sellCard(String cardName, User user){
         if (!cardInAllCards(cardName)){
             main_logger.info("Error. The entered card name is not in the list of cards of the game.");
             return false;
@@ -92,9 +101,13 @@ public class Hero {
             main_logger.info("Error. You currently don't own this card.");
             return false;
         }
-
+        if (cardInDeck(cardName) > 0){
+            main_logger.info("Error. The card you want to sell is in your deck. First remove it from your deck");
+            return false;
+        }
         // ADD TO WALLET BALANCE
-
+        Cards.card tempCard = cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName));
+        user.setWalletBalance(user.getWalletBalance() + tempCard.getPrice());
         availableCards.remove(cardName);
         return true;
     }

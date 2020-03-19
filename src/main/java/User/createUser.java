@@ -3,8 +3,6 @@ import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 
@@ -12,10 +10,7 @@ import java.io.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import static LoggingModule.LoggingClass.returnUserLoggerPath;
 
@@ -25,7 +20,7 @@ public class createUser {
     private static Logger main_logger = LoggingClass.getMainLoggerInstance();
 
     private static JSONArray assignUserID(){
-        JSONArray array = User.getUserArray();
+        JSONArray array = UserFunctions.getUserArray();
         JSONObject temp_user = (JSONObject) array.get(array.size() - 1);
         userID = (long) temp_user.get("UserID") + 1;
         main_logger.info("Assigning userID " + userID);

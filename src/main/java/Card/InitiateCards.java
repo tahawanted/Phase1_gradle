@@ -10,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static Utility.SerializationFunctions.Serialize;
+
 public class InitiateCards {
     public static void main(String[] args) {
         String []rarity = {"Common", "Rare", "Epic", "Legendary"};
@@ -83,14 +85,22 @@ public class InitiateCards {
                 heroClass[3], rarity[0], "At the start of your turn, summon a minion from your hand"));
 
 
-        for (Cards.card instance: neutralCards)
+        for (Cards.card instance: neutralCards) {
             cardArray.add(instance.getCardJsonObject());
-        for (Cards.card instance: mageCards)
+            Serialize(instance, Main_config_file.returnCardSaveDataLocation(instance.getName()));
+        }
+        for (Cards.card instance: mageCards){
             cardArray.add(instance.getCardJsonObject());
-        for (Cards.card instance: rogueCards)
+            Serialize(instance, Main_config_file.returnCardSaveDataLocation(instance.getName()));
+        }
+        for (Cards.card instance: rogueCards){
             cardArray.add(instance.getCardJsonObject());
-        for (Cards.card instance: warlockCards)
+            Serialize(instance, Main_config_file.returnCardSaveDataLocation(instance.getName()));
+        }
+        for (Cards.card instance: warlockCards){
             cardArray.add(instance.getCardJsonObject());
+            Serialize(instance, Main_config_file.returnCardSaveDataLocation(instance.getName()));
+        }
         FileFunctions.saveJsonArray(cardArray, Main_config_file.getAllCardsJSONFile());
     }
 

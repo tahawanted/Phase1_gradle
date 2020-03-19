@@ -8,8 +8,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Logger;
 
-import static User.User.userLogIn;
-import static User.User.userLogOut;
+import static User.UserFunctions.userLogIn;
+import static User.UserFunctions.userLogOut;
 
 public class CLI {
     enum locations{
@@ -144,6 +144,9 @@ public class CLI {
 
             }
         } finally {
+            // Serialize USER if it is open
+
+
             main_logger.info("Exiting");
 
             try {

@@ -2,6 +2,8 @@ package Card;
 
 import org.json.simple.JSONObject;
 
+import java.io.Serializable;
+
 interface playable{}
 interface vulnerable{}
 interface battlecry{}
@@ -26,7 +28,7 @@ interface stealth{}
 
 
 public class Cards{
-    public static class card{
+    public static class card implements Serializable {
         private String name;
         private int mana;
         private String heroClass;
@@ -99,6 +101,11 @@ public class Cards{
         public String getDescription() {
             return description;
         }
+
+        public int getPrice() {
+            return price;
+        }
+
         public JSONObject getCardJsonObject(){
             JSONObject cardObject = new JSONObject();
             cardObject.put("name", name);
