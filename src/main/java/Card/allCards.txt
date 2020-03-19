@@ -222,7 +222,7 @@
   {
     "attackPower": 3,
     "mana": 4,
-    "name": "Plagubringer",
+    "name": "Plaguebringer",
     "heroClass": "Rogue",
     "description": "Battlecry: Give a friendly minion poisonous.",
     "health": 3,

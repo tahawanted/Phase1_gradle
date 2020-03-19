@@ -70,7 +70,7 @@ public class InitiateCards {
 
         rogueCards.add(new Cards.spell("Friendly Smith", 1, heroClass[2], rarity[0],
                 "Discover a weapon from any class and add it to your deck with +2/+2"));
-        rogueCards.add(new Cards.minion("Plagubringer", 4, 3, 3, heroClass[2],
+        rogueCards.add(new Cards.minion("Plaguebringer", 4, 3, 3, heroClass[2],
                 rarity[1], "Battlecry: Give a friendly minion poisonous."));
         rogueCards.add(new Cards.weapon("Shadowblade", 3, 2, 3, heroClass[2],
                 rarity[1], "Battlecry: Your hero is immune this turn."));
@@ -91,9 +91,7 @@ public class InitiateCards {
             cardArray.add(instance.getCardJsonObject());
         for (Cards.card instance: warlockCards)
             cardArray.add(instance.getCardJsonObject());
-
         FileFunctions.saveJsonArray(cardArray, Main_config_file.getAllCardsJSONFile());
-
     }
 
 

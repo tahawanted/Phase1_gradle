@@ -33,6 +33,7 @@ public class Cards{
         private String rarity;
         private String type;
         private String description;
+        private int price;
         /*
          ADD ANY NEW VARIABLE TO THE JSON OBJECT AS WELL
          */
@@ -43,6 +44,7 @@ public class Cards{
             setType(type);
             setHeroClass(heroClass);
             this.description = description;
+            setPrice();
         }
         private void setMana(int mana){
             assert mana >= 0 && mana <= 10;
@@ -61,6 +63,18 @@ public class Cards{
             assert heroClass.equals("Mage") || heroClass.equals("Rogue") || heroClass.equals("Warlock")
                     || heroClass.equals("Neutral");
             this.heroClass = heroClass;
+        }
+        private void setPrice(){
+            switch (rarity){
+                case "Common":
+                    price = 10;
+                case "Rare":
+                    price = 20;
+                case "Epic":
+                    price = 30;
+                case "Legendary":
+                    price = 40;
+            }
         }
         public String getName() {
             return name;
@@ -99,15 +113,16 @@ public class Cards{
 
     public static class minion extends card {
         private int health;
+        private int maxHealth; //used for health restoration
         private int attackPower;
         /*
          ADD ANY NEW VARIABLE TO THE JSON OBJECT AS WELL
          */
         minion(String name, int mana, int health, int attackPower, String heroClass, String rarity, String description){
             super(name, mana, heroClass, rarity, "Minion", description);
-
             setHealth(health);
             setAttackPower(attackPower);
+            maxHealth = health;
         }
         private void setHealth(int health){
             assert health > 0 && health <= 10;
