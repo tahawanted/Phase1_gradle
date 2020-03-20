@@ -21,7 +21,7 @@ public class CLI {
     private static Logger user_logger = null;
     private static String username; // Logged in as.
 
-    public static boolean inputGeneralCommandHandling(String command, Stack<locations> followedPath){
+    public static boolean inputGeneralCommandHandling(String command, Stack<locations> followedPath, User currentUser){
         /*
         The return value of this function determines whether or not the code should use a break
         in the switch case or rather just continue on.
@@ -29,24 +29,26 @@ public class CLI {
         if (command.equals("Hearthstone help")) {
             Commands.printAllCommands();
             return true;
-        } else if (command.equals("exit -a")) {
-            inputGeneralCommandHandling("exit", followedPath);
+        } else if (command.equals("help")) {
+            Commands.printValidCommands(followedPath.peek());
+            return true;
+        }else if (command.equals("exit -a")) {
+            inputGeneralCommandHandling("exit", followedPath, currentUser);
             followedPath.pop();
             return true;
         } else if (command.equals("exit")) {
-            userLogOut(username);
+            userLogOut(currentUser);
             for (int i = followedPath.size(); i>2; i--){
                 followedPath.pop();
             }
             return true;
         } else if(command.equals("back")){
             if (followedPath.peek().equals(locations.userPanel))
-                return inputGeneralCommandHandling("exit", followedPath);
+                return inputGeneralCommandHandling("exit", followedPath, currentUser);
             if (followedPath.peek().equals(locations.enterCredentials)){
                 followedPath.pop();
                 return true;
-            }
-            if (followedPath.peek().equals(locations.createUser)){
+            } if (followedPath.peek().equals(locations.createUser)){
                 followedPath.pop();
                 return true;
             }
@@ -56,9 +58,9 @@ public class CLI {
             return false;
         }
     }
-    static String readALine(Scanner scanner, Stack<locations> followedPath, boolean []shouldBreak){
+    static String readALine(Scanner scanner, Stack<locations> followedPath, boolean []shouldBreak, User currentUser){
         String command = scanner.nextLine();
-        shouldBreak[0] = inputGeneralCommandHandling(command, followedPath);
+        shouldBreak[0] = inputGeneralCommandHandling(command, followedPath, currentUser);
         return command;
     }
     public static void main(String[] args) {
@@ -88,7 +90,7 @@ public class CLI {
                     case preGameEntry:
                         break outer;
                     case gameEntry:
-                        command_to_handle = readALine(scanner, followedPath, shouldBreak);
+                        command_to_handle = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
                         if (command_to_handle.equals("n") || command_to_handle.equals("no")
                                 || command_to_handle.equals("No") || command_to_handle.equals("N")){
@@ -97,20 +99,17 @@ public class CLI {
                         else if (command_to_handle.equals("y") || command_to_handle.equals("Y")
                                 || command_to_handle.equals("Yes") || command_to_handle.equals("yes")){
                             followedPath.push(locations.enterCredentials);
-                        }
-                        else if (command_to_handle.equals("back") || command_to_handle.equals("exit -a"))
-                            followedPath.pop();
-                        else{
+                        } else {
                             System.out.println("Invalid command. Try again.");
                         }
                         break;
 
                     case enterCredentials:
                         System.out.println("Username:");
-                        username = readALine(scanner, followedPath, shouldBreak);
+                        username = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
                         System.out.println("Password:");
-                        password = readALine(scanner, followedPath, shouldBreak);
+                        password = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
                         currentUser = userLogIn(username, password);
                         if (currentUser != null) {
@@ -126,14 +125,14 @@ public class CLI {
                     case createUser:
                         System.out.println(PasswordUsername.passwordFormat);
                         System.out.println("Username:");
-                        username = readALine(scanner, followedPath, shouldBreak);
+                        username = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
                         boolean usernameNotTaken = PasswordUsername.CheckUsernameValidity(username);
                         if (!usernameNotTaken) {
                             break;
                         }
                         System.out.println("Password:");
-                        password = readALine(scanner, followedPath, shouldBreak);
+                        password = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
                         boolean passwordFormatCheck = false;
                         while (!passwordFormatCheck) {
@@ -145,7 +144,7 @@ public class CLI {
                                 System.out.println("Password accepted. Welcome to my Hearthstone.");
                                 break;
                             }
-                            password = readALine(scanner, followedPath, shouldBreak);
+                            password = readALine(scanner, followedPath, shouldBreak, currentUser);
                             if (shouldBreak[0]) break;
                         }
                         main_logger.info("The current Balance of the user " + currentUser.getWalletBalance());

@@ -79,7 +79,6 @@ public class createUser {
         user.put("UserID", userID);
         user.put("Created At", LocalDateTime.now().toString());
         user.put("Deleted At", "None");
-        user.put("Wallet", 50);
         array.add(user);
         main_logger.info("Creating user log");
         createUserLog(username, userID, password, LocalDateTime.now().toString());

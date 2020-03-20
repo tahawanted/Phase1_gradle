@@ -39,12 +39,14 @@ public class UserFunctions {
         //LOAD THE GOD DAMN USER DATA.
         return User.deserializeUser(username, userID);
     }
-    public static void userLogOut(String username){
+    public static User userLogOut(User user){
         Logger user_logger = LoggingClass.getUserLogger();
-        user_logger.info("Log out at user request.");
+        user_logger.info("Log out.");
         // SAVE THE USER DATA. ALSO SAVE THE LOG OUT TIME.
-
         LoggingClass.closeUserLogger();
+        user.serializeUser();
+        LoggingClass.closeUserLogger();
+        return null;
     }
 
     public static long findUserID(String username){

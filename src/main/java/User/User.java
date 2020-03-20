@@ -3,6 +3,8 @@ package User;
 import ConfigSettings.Main_config_file;
 import Hero.Hero;
 import LoggingModule.LoggingClass;
+import Utility.FileFunctions;
+import org.json.simple.JSONObject;
 
 
 import java.io.Serializable;
@@ -26,14 +28,23 @@ public class User implements Serializable {
         this.hashedPassword = hashedPassword;
         walletBalance = 100;
         heroes.add(new Hero("Mage", "The sorceress of hearthstone. At her hand, all non-mage spells " +
-                "cost 2 mana less.",true));
+                "cost 2 mana less.",true,
+                "Fireblast", 2, "Deal 1 damage."));
         heroes.add(new Hero("Rogue", "The thief of these wastelands. All non-neutral and non-rogue " +
-                "cards cost 2 less for her.", true));
+                "cards cost 2 less for her.", true,
+                "Her Hand", 3, "Pick a random card from the " +
+                "opponents deck and add it to your hand. If the hero is equipped with a weapon," +
+                " pick a random card from your own deck as well"));
         heroes.add(new Hero("Warlock", "The sacrificing demon around here. He will sacrifice cards " +
                 "and health points in order to win. The gods have gifted him with 5 more health points",
-                true));
+                true, "Sacrifice thai life", 2,
+                "Reduce 2 health points and then choose one of the following actions to do:" +
+                        " 1.Give a random minion +1/+1 2.Add a card to your hand. "));
         currentHeroIndex = 0;
     }
+
+
+
     public void changeHero(String heroName){
         int index = -1;
         for (int i = 0; i<heroes.size(); i++){
@@ -86,5 +97,29 @@ public class User implements Serializable {
     public String getCurrentHeroName(){
         return heroes.get(currentHeroIndex).getName();
     }
-    public
+    public ArrayList<String> getAllCards(){
+        return heroes.get(currentHeroIndex).getAllCards();
+    }
+    public ArrayList<String> getAvailableCards(){
+        return heroes.get(currentHeroIndex).getAvailableCards();
+    }
+    public ArrayList<String> getComplementAvailableCards(){
+        return heroes.get(currentHeroIndex).getComplementAvailableCards();
+    }
+    public String getCardsInDeck(){
+        JSONObject deckCards = heroes.get(currentHeroIndex).getDeckCards();
+        return FileFunctions.prettyJsonString(deckCards);
+    }
+    public int getHeroLevel(){
+        return heroes.get(currentHeroIndex).getHeroLevel();
+    }
+    public int numberOfCardsOwnedByHero(){
+        return heroes.get(currentHeroIndex).getNumberOfCardsOwnedByHero();
+    }
+    public String heroDescription(){
+        return heroes.get(currentHeroIndex).getDescription();
+    }
+    public int currentNumberOfCardsInDeck(){
+        return heroes.get(currentHeroIndex).getCurrentNumberOfCardsInDeck();
+    }
 }

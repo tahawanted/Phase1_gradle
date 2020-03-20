@@ -33,7 +33,7 @@ public class LoggingClass {
                 user_logger.addHandler(userFh);
                 SimpleFormatter formatter = new SimpleFormatter();
                 userFh.setFormatter(formatter);
-                user_logger.info("Created current user's logger.");
+                user_logger.info("Instantiated current user's logger.");
             } catch (IOException e) {
                 e.printStackTrace();
                 main_logger.info(e.getMessage());

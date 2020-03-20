@@ -30,7 +30,9 @@ public class Hero implements Serializable {
     private ArrayList<String> availableCards = new ArrayList<>(); // Cards open for the current hero.
     private JSONObject deckCards = new JSONObject();
     transient private Logger main_logger = LoggingClass.getMainLoggerInstance();
-    public Hero(String name, String description, boolean setAvailableCardsDefault) {
+    Powers.heroPowers heroPower;
+    public Hero(String name, String description, boolean setAvailableCardsDefault, String heroPowerName,
+                int heroPowerMana, String heroPowerDescription) {
         this.name = name;
         this.description = description;
         heroLevel = 1;
@@ -42,7 +44,7 @@ public class Hero implements Serializable {
             for(String cardName: availableCards)
             deckCards.put(cardName, maximumInstanceOfEachCard);
         }
-
+        heroPower = new Powers.heroPowers(heroPowerName, heroPowerMana, heroPowerDescription);
     }
     // Used for checking if the card name is correct
     public boolean cardInAllCards(String cardName){
@@ -248,5 +250,7 @@ public class Hero implements Serializable {
         complementAvailable.removeAll(availableCards);
         return complementAvailable;
     }
-
+    public int getCurrentNumberOfCardsInDeck() {
+        return currentNumberOfCardsInDeck;
+    }
 }
