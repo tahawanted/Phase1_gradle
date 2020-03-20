@@ -46,7 +46,6 @@ public class SerializationFunctions {
             e.printStackTrace();
             main_logger.info(e.getMessage());
         }
-        main_logger.info("User object deserialized.");
         return returnObject;
     }
     public static Cards.card cardDeserialize(String cardNameOrFileLocation){
@@ -73,7 +72,6 @@ public class SerializationFunctions {
             e.printStackTrace();
             main_logger.info(e.getMessage());
         }
-        main_logger.info("Card object deserialized.");
         return returnObject;
     }
 }

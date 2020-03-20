@@ -189,6 +189,7 @@ public class CLI {
                         System.out.println("Welcome to the user panel. From here you can access the store, " +
                                 "your collections, user settings, hero settings, card manipulation " +
                                 "and in future versions, the arena. Enter your command:");
+                        currentUser.printAvailableCards();
                         commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if(shouldBreak[0]) break;
 
@@ -202,14 +203,6 @@ public class CLI {
 
             main_logger.info("Exiting");
 
-            try {
-                user_logger.info("Exiting");
-                LoggingClass.closeUserLogger();
-            } catch (Exception e){
-                main_logger.info(e.getMessage());
-                main_logger.info("Ran into this error whilst trying to exit user_logger. It has probably " +
-                        "been closed beforehand.");
-            }
             LoggingClass.closeMainLogger();
         }
     }
