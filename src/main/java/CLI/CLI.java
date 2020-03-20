@@ -189,7 +189,7 @@ public class CLI {
                         System.out.println("Welcome to the user panel. From here you can access the store, " +
                                 "your collections, user settings, hero settings, card manipulation " +
                                 "and in future versions, the arena. Enter your command:");
-                        currentUser.printAvailableCards();
+
                         commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if(shouldBreak[0]) break;
 

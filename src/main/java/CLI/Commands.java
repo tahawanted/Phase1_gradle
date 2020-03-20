@@ -16,7 +16,7 @@ public class Commands {
     private static Hashtable<String, String > help = new Hashtable<>();
     static {
         // HANDLE "HEARTHSTONE HELP" AND "EXIT -A".
-        validCommands.put(CLI.locations.preGameEntry, new String[]{""});
+        //validCommands.put(CLI.locations.preGameEntry, new String[]{""});
         validCommands.put(CLI.locations.enterCredentials, new String[]{"back"});
         validCommands.put(CLI.locations.gameEntry, new String[]{"y", "n", "back"});
         validCommands.put(CLI.locations.createUser, new String[]{"back", "user-pass -help"});
@@ -32,6 +32,7 @@ public class Commands {
         // Help object:
         String user_panel_run_only = "Command can only be run whilst in the user panel.";
         String provide_card_name = "Provide the card name after the command.";
+
         help.put("back", "Go back one step");
         help.put("exit", "Exit current user and go to sign in/up page.");
         help.put("exit -a", "Exit game.");
@@ -87,7 +88,8 @@ public class Commands {
     public static void printAllCommands(){
         System.out.println("Hearthstone help:");
         for(CLI.locations myIterator: CLI.locations.values()){
-            System.out.println(myIterator + ":");
+            if (myIterator.equals(CLI.locations.preGameEntry)) continue;
+            System.out.println("\n\n" + myIterator + ":");
             printValidCommands(myIterator);
         }
     }
@@ -101,7 +103,7 @@ public class Commands {
         for(String str:commands){
             helpString = help.get(str);
             if (helpString.charAt(0) == '-') continue;
-            System.out.println(helpString);
+            System.out.println(str + ":\t\t\t\t" + helpString);
         }
     }
 }
