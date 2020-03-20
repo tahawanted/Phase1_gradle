@@ -65,10 +65,10 @@ public class User implements Serializable {
         main_logger.info("Successfully changed hero to " + heroes.get(index).getName());
     }
 
-    public boolean buyCard(String cardName){
+    public int buyCard(String cardName){
         return heroes.get(currentHeroIndex).buyCard(cardName, this);
     }
-    public boolean sellCard(String cardName){
+    public int sellCard(String cardName){
         return heroes.get(currentHeroIndex).sellCard(cardName, this);
     }
     public boolean addToDeck(String cardName){

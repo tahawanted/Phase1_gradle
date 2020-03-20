@@ -7,6 +7,7 @@ import User.User;
 import User.createUser;
 import Utility.ClosestMatch;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -62,6 +63,7 @@ public class CLI {
     }
     static String readALine(Scanner scanner, Stack<locations> followedPath, boolean []shouldBreak, User currentUser){
         String command = scanner.nextLine();
+        command = command.replaceAll("^[ \t]+|[ \t]+$", "");
         shouldBreak[0] = inputGeneralCommandHandling(command, followedPath, currentUser);
         return command;
     }
@@ -98,7 +100,7 @@ public class CLI {
 
 
             outer: while (true) {
-                switch (followedPath.peek()){
+                inner: switch (followedPath.peek()){
                     case preGameEntry:
                         currentUser = null;
                         break outer;
@@ -192,8 +194,131 @@ public class CLI {
 
                         commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if(shouldBreak[0]) break;
-
+                        switch (commandToHandle){
+                            case "store":
+                                user_logger.info("Navigation: store");
+                                followedPath.push(locations.store);
+                                break;
+                            case "collection":
+                                user_logger.info("Navigation: collections");
+                                followedPath.push(locations.store);
+                                break;
+                            case "hero":
+                                user_logger.info("Navigation: hero");
+                                followedPath.push(locations.store);
+                                break;
+                            case "cardEnhFab":
+                                user_logger.info("Navigation: cardEnhFab");
+                                followedPath.push(locations.store);
+                                break;
+                            case "userSet":
+                                user_logger.info("Navigation: userSet");
+                                followedPath.push(locations.store);
+                                break;
+                            case "wheelOfFortune":
+                                user_logger.info("Navigation: wheelOfFortune");
+                                followedPath.push(locations.store);
+                                break;
+                            case "play":
+                                System.out.println("This section has not yet been implemented.");
+                                break;
+                            default:
+                                invalidCommandPrint(commandToHandle, followedPath);
+                        }
                         break ;
+                    case store:
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        if(shouldBreak[0]) break;
+                        switch (commandToHandle){
+                            case "wallet":
+                                user_logger.info("Command: wallet");
+                                System.out.println("The current wallet balance is: " + currentUser.getWalletBalance());
+                                break inner;
+                            case "listBuy":
+                                user_logger.info("Command: listBuy");
+                                System.out.println("The cards that you can buy: \n"
+                                        + currentUser.getComplementAvailableCards());
+                                break inner;
+                            case "listSell":
+                                user_logger.info("Command: listSell");
+                                System.out.println("The cards that you can sell. Heed attention to the fact that " +
+                                        "if a card is currently in your deck, you cannot sell it.");
+                                System.out.println(currentUser.getAvailableCards());
+                                break inner;
+                            case "ls":
+                                user_logger.info("Command: ls");
+                                System.out.println("The purchasable cards:\n"
+                                        + currentUser.getComplementAvailableCards());
+                                System.out.println("The cards that you can sell:\n" + currentUser.getAvailableCards());
+                                break inner;
+                        }
+                        if(commandToHandle.contains("buySingle")){
+                            String cardName = commandToHandle.substring(9)
+                                    .replaceAll("^[ \t]+|[ \t]+$", "");
+                            int result = currentUser.buyCard(cardName);
+                            switch (result){
+                                case 404:
+                                    user_logger.info("Command: buySingle " + cardName +
+                                            "\nError. Card name is wrong");
+                                    System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                            cardName, currentUser.getAllCards()));
+                                    break inner;
+                                case 402:
+                                    user_logger.info("Command: buySingle " + cardName +
+                                            "\nError. Insufficient funds");
+                                    break inner;
+                                case 400:
+                                    user_logger.info("Command: buySingle " + cardName +
+                                            "\nError. The card is already in your collection. You high?");
+                                    break inner;
+                                case 200:
+                                    user_logger.info("Command: buySingle " + cardName +
+                                            "\nPurchase successful.");
+                                    break inner;
+                            }
+                        } else if (commandToHandle.contains("sell")){
+                            String cardName = commandToHandle.substring(4)
+                                    .replaceAll("^[ \t]+|[ \t]+$", "");
+                            int result = currentUser.sellCard(cardName);
+                            switch (result){
+                                case 404:
+                                    user_logger.info("Command: sell " + cardName +
+                                            "\nError. Card name is wrong");
+                                    System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                            cardName, currentUser.getAllCards()));
+                                    break inner;
+                                case 403:
+                                    user_logger.info("Command: sell " + cardName +
+                                            "\nError. The card is currently in your deck." +
+                                            " First remove it from your deck.");
+                                    break inner;
+                                case 401:
+                                    user_logger.info("Command: sell " + cardName +
+                                            "\nError. You do not own this card.");
+                                    break inner;
+                                case 200:
+                                    user_logger.info("Command: sell " + cardName +
+                                            "\nTransaction Successful");
+                                    break inner;
+                            }
+                        } else if (commandToHandle.contains("detail")) {
+                            String cardName = commandToHandle.substring(4)
+                                    .replaceAll("^[ \t]+|[ \t]+$", "");
+                            try {
+                                currentUser.printCardInformation(cardName);
+                                user_logger.info("Command: detail " + cardName);
+                            } catch (Exception e){
+                                user_logger.info("Command: detail + " +cardName + "\nError. Card name incorrect.");
+                                System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                        cardName, currentUser.getAllCards()));
+                            }
+                        }else if (commandToHandle.contains("buyPack")){
+                            System.out.println("This section has not yet been implemented.");
+                        } else {
+                            invalidCommandPrint(commandToHandle, followedPath);
+                        }
+                        break ;
+                    case collectionsAndDeck:
                 }
 
             }

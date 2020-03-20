@@ -26,8 +26,8 @@ public class Commands {
         validCommands.put(CLI.locations.wheelOfFortune, new String[]{"roll", "back", "exit"});
         validCommands.put(CLI.locations.userSettings, new String[]{"chPass", "exportData", "importData", "deleteUser",
                 "back", "exit"});
-        validCommands.put(CLI.locations.store, new String[]{"buySingle", "buyPack", "ls", "wallet", "sell", "back", "exit"});
-        validCommands.put(CLI.locations.collectionsAndDeck, new String[]{"add", "remove", "ls", "back", "exit"});
+        validCommands.put(CLI.locations.store, new String[]{"buySingle", "buyPack", "detail", "listBuy", "listSell", "ls", "wallet", "sell", "back", "exit"});
+        validCommands.put(CLI.locations.collectionsAndDeck, new String[]{"add", "remove", "detail", "ls", "back", "exit"});
         validCommands.put(CLI.locations.cardFabricationAndEnhancement, new String[]{"create", "enhance"});
         // Help object:
         String user_panel_run_only = "Command can only be run whilst in the user panel.";
@@ -49,20 +49,10 @@ public class Commands {
         help.put("chHero", "Change your current hero. Provide the hero name after the command.");
         help.put("upHero", "Upgrade your current hero.");
 
-        help.put("ls", "list contents. This command can be run in various sections.\n" +
-                "The options include -a -m -n -b -s. Note that not all options are applicable in \n" +
-                "every section that this command may be valid");
-        help.put("-lsCollection", "list cards. Options: \n" +
-                "-a: list all available cards for the current hero.\n" +
-                "-m: list all cards in the current hero's deck.\n" +
-                "-n: list all cards NOT in the current hero's deck.");
-        help.put("-lsStore", "list all cards available for buy/sell. Options:\n" +
-                "-b: Cards available for buying.\n" +
-                "-s: Cards available for selling." +
-                "-bPack: Packs available for buying.");
-        help.put("-lsHero", "list heros. Options:\n" +
-                "-a: All heros.\n" +
-                "-m: Current chosen hero.");
+        help.put("listBuy", "list the purchaseable cards");
+        help.put("listSell", "list the cards that can be sold.");
+        help.put("ls", "list contents.");
+        help.put("detail", "Print the details of a given card.");
 
         help.put("roll", "If valid, it will roll the wheel of fortune. " +
                 "If not, it will show when you can roll the wheel.");

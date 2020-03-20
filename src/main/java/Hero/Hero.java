@@ -65,16 +65,16 @@ public class Hero implements Serializable {
     }
 
 
-    public boolean buyCard(String cardName, User user){
+    public int buyCard(String cardName, User user){
         // The current implementation uses the fact that complement cards are created when this command is called
         // and using this, prevents buying cards already in you available cards
          if (!cardInAllCards(cardName)){
              main_logger.info("Error. The entered card name is not in the list of cards of the game.");
-             return false;
+             return 404;
          }
         if (!cardInComplementAvailableCards(cardName)){
             main_logger.info("Error. You already own this card");
-            return false;
+            return 400;
         }
 
         Cards.card tempCard = cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName));
@@ -83,32 +83,32 @@ public class Hero implements Serializable {
         int currentBalance = user.getWalletBalance();
         if (price > currentBalance){
             main_logger.info("Error. Insufficient balance");
-            return false;
+            return 402;
         }
         // If wallet balance is also ok, reduce the card cost from the balance
         user.setWalletBalance(currentBalance - price);
         availableCards.add(cardName);
         main_logger.info("Purchase successful. Card added to your collection.");
-        return true;
+        return 200;
     }
-    public boolean sellCard(String cardName, User user){
+    public int sellCard(String cardName, User user){
         if (!cardInAllCards(cardName)){
             main_logger.info("Error. The entered card name is not in the list of cards of the game.");
-            return false;
+            return 404;
         }
         if (!cardInAvailableCards(cardName)){
             main_logger.info("Error. You currently don't own this card.");
-            return false;
+            return 401;
         }
         if (cardInDeck(cardName) > 0){
             main_logger.info("Error. The card you want to sell is in your deck. First remove it from your deck");
-            return false;
+            return 403;
         }
         // ADD TO WALLET BALANCE
         Cards.card tempCard = cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName));
         user.setWalletBalance(user.getWalletBalance() + tempCard.getPrice());
         availableCards.remove(cardName);
-        return true;
+        return 200;
     }
     public boolean addToDeck(String cardName){
         if (!cardInAllCards(cardName)){
