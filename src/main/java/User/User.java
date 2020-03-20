@@ -1,5 +1,6 @@
 package User;
 
+import Card.Cards;
 import ConfigSettings.Main_config_file;
 import Hero.Hero;
 import LoggingModule.LoggingClass;
@@ -11,8 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import static Utility.SerializationFunctions.Serialize;
-import static Utility.SerializationFunctions.userDeserialize;
+import static Utility.SerializationFunctions.*;
 
 public class User implements Serializable {
     private String username;
@@ -121,5 +121,23 @@ public class User implements Serializable {
     }
     public int currentNumberOfCardsInDeck(){
         return heroes.get(currentHeroIndex).getCurrentNumberOfCardsInDeck();
+    }
+    public void printCardInformation(String cardName){
+        System.out.println(FileFunctions.prettyJsonString(
+                cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName)).getCardJsonObject()));
+    }
+    public void printCardInformation(ArrayList<String> cardNames){
+        for (String cardName: cardNames) printCardInformation(cardName);
+    }
+    public void printDeckCards(){
+        for (Object st:heroes.get(currentHeroIndex).getDeckCards().keySet()){
+            printCardInformation(st.toString());
+        }
+    }
+    public void printAvailableCards(){
+        printCardInformation(getAvailableCards());
+    }
+    public void printBuyableCards(){
+        printCardInformation(getComplementAvailableCards());
     }
 }

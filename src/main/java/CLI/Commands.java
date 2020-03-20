@@ -1,8 +1,6 @@
 package CLI;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Objects;
+import java.util.*;
 
 public class Commands {
     /*
@@ -80,6 +78,11 @@ public class Commands {
         help.put("create", "Create a card.");
         help.put("enhance", "Enhance a card through spending gold. " + provide_card_name);
 
+    }
+    public static ArrayList<String> getCurrentLevelCommands(CLI.locations location){
+        ArrayList<String> array = new ArrayList<>();
+        Collections.addAll(array, validCommands.get(location));
+        return array;
     }
     public static void printAllCommands(){
         System.out.println("Hearthstone help:");

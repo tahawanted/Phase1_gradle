@@ -1,7 +1,9 @@
 package Hero;
 
+import java.io.Serializable;
+
 public class Powers {
-    public static class heroPowers{
+    public static class heroPowers implements Serializable {
         String name;
         int mana;
         String description;

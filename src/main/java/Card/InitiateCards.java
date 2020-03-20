@@ -1,6 +1,7 @@
 package Card;
 
 import ConfigSettings.Main_config_file;
+import LoggingModule.LoggingClass;
 import Utility.FileFunctions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static Utility.SerializationFunctions.Serialize;
 

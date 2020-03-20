@@ -16,7 +16,6 @@ public class ClosestMatch {
             }
         }
         return possibilities.get(index);
-
     }
     static int levenshteinDistance(String x, String y) {
         int[][] dp = new int[x.length() + 1][y.length() + 1];

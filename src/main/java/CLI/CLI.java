@@ -1,9 +1,11 @@
 package CLI;
 
+import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
 import User.PasswordUsername;
 import User.User;
 import User.createUser;
+import Utility.ClosestMatch;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -63,9 +65,19 @@ public class CLI {
         shouldBreak[0] = inputGeneralCommandHandling(command, followedPath, currentUser);
         return command;
     }
+    static void invalidCommandPrint(String commandToHandle, Stack<locations> followedPath){
+        System.out.println("Invalid command. Try again.");
+        System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                commandToHandle, Commands.getCurrentLevelCommands(followedPath.peek())));
+    }
     public static void main(String[] args) {
+        boolean flag = Main_config_file.createRequiredDirectories();
+        if(!flag){
+            System.out.println("Error could not create the directories");
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
-        String command_to_handle;
+        String commandToHandle;
         Stack<locations> followedPath = new Stack<>();
         followedPath.push(locations.preGameEntry);
         followedPath.push(locations.gameEntry);
@@ -88,23 +100,26 @@ public class CLI {
             outer: while (true) {
                 switch (followedPath.peek()){
                     case preGameEntry:
+                        currentUser = null;
                         break outer;
                     case gameEntry:
-                        command_to_handle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        currentUser = null;
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
-                        if (command_to_handle.equals("n") || command_to_handle.equals("no")
-                                || command_to_handle.equals("No") || command_to_handle.equals("N")){
+                        if (commandToHandle.equals("n") || commandToHandle.equals("no")
+                                || commandToHandle.equals("No") || commandToHandle.equals("N")){
                             followedPath.push(locations.createUser);
                         }
-                        else if (command_to_handle.equals("y") || command_to_handle.equals("Y")
-                                || command_to_handle.equals("Yes") || command_to_handle.equals("yes")){
+                        else if (commandToHandle.equals("y") || commandToHandle.equals("Y")
+                                || commandToHandle.equals("Yes") || commandToHandle.equals("yes")){
                             followedPath.push(locations.enterCredentials);
                         } else {
-                            System.out.println("Invalid command. Try again.");
+                            invalidCommandPrint(commandToHandle, followedPath);
                         }
                         break;
 
                     case enterCredentials:
+                        currentUser = null;
                         System.out.println("Username:");
                         username = readALine(scanner, followedPath, shouldBreak, currentUser);
                         if (shouldBreak[0]) break;
@@ -123,6 +138,7 @@ public class CLI {
                         }
                         break;
                     case createUser:
+                        currentUser = null;
                         System.out.println(PasswordUsername.passwordFormat);
                         System.out.println("Username:");
                         username = readALine(scanner, followedPath, shouldBreak, currentUser);
@@ -148,8 +164,35 @@ public class CLI {
                             if (shouldBreak[0]) break;
                         }
                         main_logger.info("The current Balance of the user " + currentUser.getWalletBalance());
+                        main_logger.info("Your current hero: " + currentUser.getCurrentHeroName() +
+                                " with hero level: " + currentUser.getHeroLevel());
+                        main_logger.info("The cards in your heroes deck:\n"
+                                + currentUser.getCardsInDeck());
+                        while (true) {
+                            System.out.println("If you wish to see the details of your current cards, enter y, otherwise," +
+                                    " enter n to continue to the user panel");
+                            commandToHandle = scanner.nextLine();
+                            if (commandToHandle.equals("n") || commandToHandle.equals("no")
+                                    || commandToHandle.equals("No") || commandToHandle.equals("N")){
+                                break;
+                            }
+                            else if (commandToHandle.equals("y") || commandToHandle.equals("Y")
+                                    || commandToHandle.equals("Yes") || commandToHandle.equals("yes")){
+                                currentUser.printDeckCards();
+                                break;
+                            } else {
+                                System.out.println("Invalid input. Try again.");
+                            }
+                        }
                         break;
                     case userPanel:
+                        System.out.println("Welcome to the user panel. From here you can access the store, " +
+                                "your collections, user settings, hero settings, card manipulation " +
+                                "and in future versions, the arena. Enter your command:");
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        if(shouldBreak[0]) break;
+
+                        break ;
                 }
 
             }

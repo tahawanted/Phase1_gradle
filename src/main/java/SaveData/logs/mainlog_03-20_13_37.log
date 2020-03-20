@@ -1,0 +1,72 @@
+Mar 20, 2020 1:37:13 PM User.createUser createAUser
+INFO: Assigning userID 0
+Mar 20, 2020 1:37:13 PM User.createUser createAUser
+INFO: Creating user. Username: taha
+Mar 20, 2020 1:37:13 PM User.createUser createAUser
+INFO: Creating user log
+Mar 20, 2020 1:37:13 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 20, 2020 1:37:13 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 20, 2020 1:37:13 PM Utility.SerializationFunctions Serialize
+INFO: Hero.Powers$heroPowers
+Mar 20, 2020 1:37:13 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 20, 2020 1:37:13 PM CLI.CLI main
+INFO: The current Balance of the user 100
+Mar 20, 2020 1:37:13 PM CLI.CLI main
+INFO: Your current hero: Magewith hero level: 1
+Mar 20, 2020 1:37:13 PM CLI.CLI main
+INFO: The cards in your heroes deck:
+{
+  "Holy Fire": 2,
+  "Novice Engineer": 2,
+  "Regenerate": 2,
+  "Polymorph": 2,
+  "Lord of the Arena": 2,
+  "Arcane Missiles": 2,
+  "Shieldbearer": 2,
+  "Goldshire Footman": 2,
+  "Stonetusk Boar": 2,
+  "Raid Leader": 2
+}
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.
+Mar 20, 2020 1:37:48 PM Utility.SerializationFunctions cardDeserialize
+INFO: User object deserialized.

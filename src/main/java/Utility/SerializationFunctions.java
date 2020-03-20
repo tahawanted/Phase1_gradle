@@ -1,6 +1,7 @@
 package Utility;
 
 import Card.Cards;
+import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
 import User.User;
 
@@ -48,9 +49,14 @@ public class SerializationFunctions {
         main_logger.info("User object deserialized.");
         return returnObject;
     }
-    public static Cards.card cardDeserialize(String fileLocation){
+    public static Cards.card cardDeserialize(String cardNameOrFileLocation){
         // You must put the object name like below after you have called this method
         // returnObject = (className) returnObject;
+        String fileLocation;
+        if(cardNameOrFileLocation.contains(".ser"))
+            fileLocation = cardNameOrFileLocation;
+        else
+            fileLocation= Main_config_file.returnCardSaveDataLocation(cardNameOrFileLocation);
         Cards.card returnObject = null;
         try {
             FileInputStream file = new FileInputStream(fileLocation);
@@ -67,7 +73,7 @@ public class SerializationFunctions {
             e.printStackTrace();
             main_logger.info(e.getMessage());
         }
-        main_logger.info("User object deserialized.");
+        main_logger.info("Card object deserialized.");
         return returnObject;
     }
 }

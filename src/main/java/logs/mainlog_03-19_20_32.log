@@ -1,6 +1,0 @@
-Mar 19, 2020 8:32:16 PM CLI.CLI main
-INFO: Exiting
-Mar 19, 2020 8:32:16 PM CLI.CLI main
-INFO: null
-Mar 19, 2020 8:32:16 PM CLI.CLI main
-INFO: Ran into this error whilst trying to exit user_logger. It has probably been closed beforehand.

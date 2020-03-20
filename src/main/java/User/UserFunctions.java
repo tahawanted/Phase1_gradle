@@ -43,7 +43,6 @@ public class UserFunctions {
         Logger user_logger = LoggingClass.getUserLogger();
         user_logger.info("Log out.");
         // SAVE THE USER DATA. ALSO SAVE THE LOG OUT TIME.
-        LoggingClass.closeUserLogger();
         user.serializeUser();
         LoggingClass.closeUserLogger();
         return null;
