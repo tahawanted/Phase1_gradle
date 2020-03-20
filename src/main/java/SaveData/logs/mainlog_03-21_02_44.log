@@ -1,0 +1,6 @@
+Mar 21, 2020 2:44:57 AM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 2:44:57 AM Utility.SerializationFunctions userDeserialize
+INFO: Hero.Hero; local class incompatible: stream classdesc serialVersionUID = -2694603475205968417, local class serialVersionUID = 7242777987093157932
+Mar 21, 2020 2:45:11 AM CLI.CLI main
+INFO: Exiting

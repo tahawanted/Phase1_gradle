@@ -1,0 +1,6 @@
+Mar 21, 2020 2:42:34 AM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 2:42:34 AM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 2:43:19 AM CLI.CLI main
+INFO: Exiting

@@ -1,0 +1,12 @@
+Mar 21, 2020 2:31:42 AM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 2:31:42 AM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user Fatemeh
+Mar 21, 2020 2:31:42 AM User.UserFunctions userLogIn
+INFO: Password incorrect.
+Mar 21, 2020 2:31:48 AM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 2:31:48 AM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 2:31:54 AM CLI.CLI main
+INFO: Exiting

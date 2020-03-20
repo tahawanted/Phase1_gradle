@@ -133,6 +133,7 @@ public class CLI {
                             main_logger.info("User log in successful. Welcome");
                             followedPath.pop();
                             followedPath.push(locations.userPanel);
+                            user_logger = LoggingClass.getUserLogger();
 
                         } else {
                             System.out.println("Log in unsuccessful. Try again.");
@@ -160,6 +161,7 @@ public class CLI {
                                 followedPath.push(locations.userPanel);
                                 currentUser = createUser.createAUser(username, password);
                                 System.out.println("Password accepted. Welcome to my Hearthstone.");
+                                user_logger = LoggingClass.getUserLogger();
                                 break;
                             }
                             password = readALine(scanner, followedPath, shouldBreak, currentUser);
@@ -180,6 +182,7 @@ public class CLI {
                             }
                             else if (commandToHandle.equals("y") || commandToHandle.equals("Y")
                                     || commandToHandle.equals("Yes") || commandToHandle.equals("yes")){
+                                user_logger.info("Command: view deck cards after user creation.");
                                 currentUser.printDeckCards();
                                 break;
                             } else {
@@ -302,7 +305,7 @@ public class CLI {
                                     break inner;
                             }
                         } else if (commandToHandle.contains("detail")) {
-                            String cardName = commandToHandle.substring(4)
+                            String cardName = commandToHandle.substring(6)
                                     .replaceAll("^[ \t]+|[ \t]+$", "");
                             try {
                                 currentUser.printCardInformation(cardName);
@@ -319,6 +322,19 @@ public class CLI {
                         }
                         break ;
                     case collectionsAndDeck:
+                        break ;
+                    case hero:
+                        break;
+                    case userSettings:
+                        break;
+                    case cardFabricationAndEnhancement:
+                        System.out.println("This section has not yet been implemented");
+                        followedPath.pop();
+                        break ;
+                    case wheelOfFortune:
+                        System.out.println("This section has not yet been implemented.");
+                        followedPath.pop();
+                        break ;
                 }
 
             }

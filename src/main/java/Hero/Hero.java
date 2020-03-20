@@ -29,7 +29,7 @@ public class Hero implements Serializable {
     // special cards.
     private ArrayList<String> availableCards = new ArrayList<>(); // Cards open for the current hero.
     private JSONObject deckCards = new JSONObject();
-    transient private Logger main_logger = LoggingClass.getMainLoggerInstance();
+    transient static private Logger main_logger = LoggingClass.getMainLoggerInstance();
     Powers.heroPowers heroPower;
     public Hero(String name, String description, boolean setAvailableCardsDefault, String heroPowerName,
                 int heroPowerMana, String heroPowerDescription) {
@@ -45,6 +45,7 @@ public class Hero implements Serializable {
             deckCards.put(cardName, maximumInstanceOfEachCard);
         }
         heroPower = new Powers.heroPowers(heroPowerName, heroPowerMana, heroPowerDescription);
+
     }
     // Used for checking if the card name is correct
     public boolean cardInAllCards(String cardName){

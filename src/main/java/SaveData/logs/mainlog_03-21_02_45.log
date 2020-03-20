@@ -1,0 +1,38 @@
+Mar 21, 2020 2:45:23 AM User.createUser assignUserID
+INFO: Assigning userID 3
+Mar 21, 2020 2:45:23 AM User.createUser createAUser
+INFO: Creating user. Username: fatemeh
+Mar 21, 2020 2:45:23 AM User.createUser createAUser
+INFO: Creating user log
+Mar 21, 2020 2:45:23 AM User.createUser createAUser
+INFO: Creating user class instance
+Mar 21, 2020 2:45:23 AM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 21, 2020 2:45:24 AM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 2:45:24 AM CLI.CLI main
+INFO: The current Balance of the user 100
+Mar 21, 2020 2:45:24 AM CLI.CLI main
+INFO: Your current hero: Mage with hero level: 1
+Mar 21, 2020 2:45:24 AM CLI.CLI main
+INFO: The cards in your heroes deck:
+{
+  "Holy Fire": 2,
+  "Novice Engineer": 2,
+  "Regenerate": 2,
+  "Polymorph": 2,
+  "Lord of the Arena": 2,
+  "Arcane Missiles": 2,
+  "Shieldbearer": 2,
+  "Goldshire Footman": 2,
+  "Stonetusk Boar": 2,
+  "Raid Leader": 2
+}
+Mar 21, 2020 2:45:43 AM Hero.Hero sellCard
+INFO: Error. You currently don't own this card.
+Mar 21, 2020 2:46:09 AM Hero.Hero buyCard
+INFO: Error. The entered card name is not in the list of cards of the game.
+Mar 21, 2020 2:46:23 AM Hero.Hero buyCard
+INFO: Purchase successful. Card added to your collection.
+Mar 21, 2020 2:46:30 AM CLI.CLI main
+INFO: Exiting

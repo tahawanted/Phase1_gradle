@@ -21,7 +21,7 @@ public class User implements Serializable {
     private int walletBalance;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private int currentHeroIndex;
-    transient Logger main_logger = LoggingClass.getMainLoggerInstance();
+    transient static Logger main_logger = LoggingClass.getMainLoggerInstance();
     User(String username, long userID, String hashedPassword){
         this.username = username;
         this.userID = userID;

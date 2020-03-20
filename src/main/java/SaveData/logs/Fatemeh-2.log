@@ -1,0 +1,49 @@
+Username: Fatemeh
+user ID: 2
+Password Hash:2120146ca3884bae6c2128cbda13b320fd19b3744b1f3e061052e56a6b1f2f85
+Creation Time: 2020-03-21T02:30:41.884849300
+Deleted At:
+
+
+
+
+
+
+
+
+
+User logs:
+Mar 21, 2020 2:31:48 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:31:48 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 2:33:30 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:33:30 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 2:37:43 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:37:43 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 2:37:46 AM CLI.CLI main
+INFO: Navigation: store
+Mar 21, 2020 2:38:13 AM CLI.CLI main
+INFO: Command: detail + il Archane missiles
+Error. Card name incorrect.
+Mar 21, 2020 2:38:21 AM CLI.CLI main
+INFO: Command: detail + il Arcane Missiles
+Error. Card name incorrect.
+Mar 21, 2020 2:39:26 AM CLI.CLI main
+INFO: Command: listBuy
+Mar 21, 2020 2:42:34 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:42:34 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 2:42:49 AM CLI.CLI main
+INFO: Navigation: store
+Mar 21, 2020 2:43:03 AM CLI.CLI main
+INFO: Command: detail Worgen Infiltrator
+Mar 21, 2020 2:44:57 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:44:57 AM User.UserFunctions userLogIn
+INFO: Log in.

@@ -53,3 +53,7 @@ Mar 21, 2020 1:47:01 AM LoggingModule.LoggingClass getUserLogger
 INFO: Instantiated current user's logger.
 Mar 21, 2020 1:47:01 AM User.UserFunctions userLogIn
 INFO: Log in.
+Mar 21, 2020 2:29:55 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 2:29:55 AM User.UserFunctions userLogIn
+INFO: Log in.

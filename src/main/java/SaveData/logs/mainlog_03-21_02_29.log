@@ -1,0 +1,36 @@
+Mar 21, 2020 2:29:55 AM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 2:29:55 AM Utility.SerializationFunctions userDeserialize
+INFO: User.User; local class incompatible: stream classdesc serialVersionUID = -1121689338573053571, local class serialVersionUID = 327897758162295873
+Mar 21, 2020 2:30:41 AM User.createUser assignUserID
+INFO: Assigning userID 2
+Mar 21, 2020 2:30:41 AM User.createUser createAUser
+INFO: Creating user. Username: Fatemeh
+Mar 21, 2020 2:30:41 AM User.createUser createAUser
+INFO: Creating user log
+Mar 21, 2020 2:30:41 AM User.createUser createAUser
+INFO: Creating user class instance
+Mar 21, 2020 2:30:41 AM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 21, 2020 2:30:41 AM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 2:30:41 AM CLI.CLI main
+INFO: The current Balance of the user 100
+Mar 21, 2020 2:30:41 AM CLI.CLI main
+INFO: Your current hero: Mage with hero level: 1
+Mar 21, 2020 2:30:41 AM CLI.CLI main
+INFO: The cards in your heroes deck:
+{
+  "Holy Fire": 2,
+  "Novice Engineer": 2,
+  "Regenerate": 2,
+  "Polymorph": 2,
+  "Lord of the Arena": 2,
+  "Arcane Missiles": 2,
+  "Shieldbearer": 2,
+  "Goldshire Footman": 2,
+  "Stonetusk Boar": 2,
+  "Raid Leader": 2
+}
+Mar 21, 2020 2:31:00 AM CLI.CLI main
+INFO: Exiting
