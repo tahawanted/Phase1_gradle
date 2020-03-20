@@ -66,9 +66,6 @@ public class PasswordUsername {
                     main_logger.info("Incorrect password entered for user " + username);
                     return "Incorrect";
                 }
-            } else {
-                main_logger.info("User Does not exist");
-                return "UserNonExistent";
             }
         }
         return "Incorrect";

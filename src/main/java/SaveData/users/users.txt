@@ -5,5 +5,12 @@
     "Password": "bcbc7dd0ee672c482f445f51b4c7bf7e35578f2782e5c06f3445003444316062",
     "Created At": "2020-03-20T13:41:53.651417300",
     "Deleted At": "None"
+  },
+  {
+    "Username": "Taha",
+    "UserID": 1,
+    "Password": "bcbc7dd0ee672c482f445f51b4c7bf7e35578f2782e5c06f3445003444316062",
+    "Created At": "2020-03-21T01:20:08.532871500",
+    "Deleted At": "None"
   }
 ]

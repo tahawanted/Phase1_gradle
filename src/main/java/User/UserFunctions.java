@@ -93,4 +93,8 @@ public class UserFunctions {
         if (!flag) main_logger.info("Error. Could not find the user in the user list.");
         return result;
     }
+
+    public static void main(String[] args) {
+        System.out.println(findUserID("Taha"));
+    }
 }

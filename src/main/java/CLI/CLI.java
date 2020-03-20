@@ -88,7 +88,7 @@ public class CLI {
         System.out.println("\t\t\t\t\tWelcome to my Hearthstone." +
                 "\n Sorry for the inconvenience that you are forced to work" +
                 "with this petty command line\n rather than a beautiful graphic user interface. Still, we must work with" +
-                "what we have. To see the system help, enter \"Hearthstone help\". To exit the game in any stage, " +
+                "what we have.\nTo see the system help, enter \"Hearthstone help\". To exit the game in any stage, " +
                 "enter \"exit -a\". To log out of your user, enter \"exit\"." +
                 "\nIf you already have an account, enter y, otherwise enter n:");
 

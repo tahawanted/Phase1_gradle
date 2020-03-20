@@ -13,3 +13,15 @@ Deleted At:
 
 
 User logs:
+Mar 21, 2020 1:12:59 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 1:12:59 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 1:16:26 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 1:16:26 AM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 1:17:42 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 1:17:42 AM User.UserFunctions userLogIn
+INFO: Log in.

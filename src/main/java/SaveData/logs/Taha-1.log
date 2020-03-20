@@ -1,0 +1,19 @@
+Username: Taha
+user ID: 1
+Password Hash:bcbc7dd0ee672c482f445f51b4c7bf7e35578f2782e5c06f3445003444316062
+Creation Time: 2020-03-21T01:20:08.533868400
+Deleted At:
+
+
+
+
+
+
+
+
+
+User logs:
+Mar 21, 2020 1:27:10 AM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 1:27:10 AM User.UserFunctions userLogIn
+INFO: Log in.
