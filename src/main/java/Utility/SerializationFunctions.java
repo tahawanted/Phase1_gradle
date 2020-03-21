@@ -27,7 +27,7 @@ public class SerializationFunctions {
         }
         main_logger.info("Object has been serialized");
     }
-    public static User userDeserialize(String fileLocation){
+    public static User userDeserialize(String fileLocation) {
         // You must put the object name like below after you have called this method
         // returnObject = (className) returnObject;
         User returnObject = null;

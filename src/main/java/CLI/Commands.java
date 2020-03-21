@@ -26,8 +26,10 @@ public class Commands {
         validCommands.put(CLI.locations.wheelOfFortune, new String[]{"roll", "back", "exit"});
         validCommands.put(CLI.locations.userSettings, new String[]{"chPass", "exportData", "importData", "deleteUser",
                 "back", "exit"});
-        validCommands.put(CLI.locations.store, new String[]{"buySingle", "buyPack", "detail", "listBuy", "listSell", "ls", "wallet", "sell", "back", "exit"});
-        validCommands.put(CLI.locations.collectionsAndDeck, new String[]{"add", "remove", "detail", "ls", "back", "exit"});
+        validCommands.put(CLI.locations.store, new String[]{"buySingle", "buyPack", "detail", "listBuy", "listSell",
+                "ls", "wallet", "sell", "back", "exit"});
+        validCommands.put(CLI.locations.collectionsAndDeck, new String[]{"add", "remove", "detail", "listDeck",
+                "listAll", "listAddable", "ls", "back", "exit"});
         validCommands.put(CLI.locations.cardFabricationAndEnhancement, new String[]{"create", "enhance"});
         // Help object:
         String user_panel_run_only = "Command can only be run whilst in the user panel.";
@@ -53,6 +55,13 @@ public class Commands {
         help.put("listSell", "list the cards that can be sold.");
         help.put("ls", "list contents.");
         help.put("detail", "Print the details of a given card.");
+
+        help.put("listAll", "List all of available cards.");
+        help.put("listDeck", "List the cards currently in you deck");
+        help.put("listAddable", "List cards that are available buy out of your deck and thus " +
+                "can be added to your deck.");
+
+
 
         help.put("roll", "If valid, it will roll the wheel of fortune. " +
                 "If not, it will show when you can roll the wheel.");

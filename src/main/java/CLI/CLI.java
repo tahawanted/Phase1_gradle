@@ -7,7 +7,6 @@ import User.User;
 import User.createUser;
 import Utility.ClosestMatch;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -24,22 +23,52 @@ public class CLI {
     private static Logger user_logger = null;
     private static String username; // Logged in as.
 
-    public static boolean inputGeneralCommandHandling(String command, Stack<locations> followedPath, User currentUser){
+    static User currentUser = null, cloneUser = null;
+
+    public static boolean inputGeneralCommandHandling(String command, Stack<locations> followedPath){
         /*
         The return value of this function determines whether or not the code should use a break
         in the switch case or rather just continue on.
          */
         if (command.equals("Hearthstone help")) {
+            if (user_logger != null) {
+                user_logger.info("Command: Hearthstone help");
+            }
             Commands.printAllCommands();
             return true;
         } else if (command.equals("help")) {
+            if (user_logger != null){
+                user_logger.info("Command: help");
+            }
             Commands.printValidCommands(followedPath.peek());
             return true;
         }else if (command.equals("exit -a")) {
-            inputGeneralCommandHandling("exit", followedPath, currentUser);
+            if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() < cloneUser.getDeckSize()){
+                main_logger.info("Error. You cannot exit the collection section until you complete your deck");
+                user_logger.info("Command: exit -a\nError. Deck not at full capacity.");
+                return true;
+            } else if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() == cloneUser.getDeckSize()){
+                main_logger.info("Deck cards OK.");
+                cloneUser = null;
+            }
+            user_logger.info("Command: exit -a");
+            inputGeneralCommandHandling("exit", followedPath);
             followedPath.pop();
             return true;
         } else if (command.equals("exit")) {
+            if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() < cloneUser.getDeckSize()){
+                main_logger.info("Error. You cannot exit the collection section until you complete your deck");
+                user_logger.info("Command: exit\nError. Deck not at full capacity.");
+                return true;
+            } else if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() == cloneUser.getDeckSize()){
+                main_logger.info("Deck cards OK.");
+                cloneUser = null;
+            }
+            user_logger.info("Command: exit");
             userLogOut(currentUser);
             for (int i = followedPath.size(); i>2; i--){
                 followedPath.pop();
@@ -47,7 +76,7 @@ public class CLI {
             return true;
         } else if(command.equals("back")){
             if (followedPath.peek().equals(locations.userPanel))
-                return inputGeneralCommandHandling("exit", followedPath, currentUser);
+                return inputGeneralCommandHandling("exit", followedPath);
             if (followedPath.peek().equals(locations.enterCredentials)){
                 followedPath.pop();
                 return true;
@@ -55,23 +84,54 @@ public class CLI {
                 followedPath.pop();
                 return true;
             }
+            if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() < cloneUser.getDeckSize()) {
+                main_logger.info("Error. You cannot exit the collection section until you complete your deck");
+                user_logger.info("Command: back\nError. Deck not at full capacity.");
+                return true;
+            } else if (followedPath.peek().equals(locations.collectionsAndDeck) &&
+                    cloneUser != null && cloneUser.currentNumberOfCardsInDeck() == cloneUser.getDeckSize()){
+                main_logger.info("Deck cards OK.");
+                cloneUser = null;
+            }
+            // ADD IT TO HERE. ALSO ADD A MECHANISM IN THE ABOVE ONES THAT CHECKS CLONEUSER IS NULL AT EVERY PLACE.
             followedPath.pop();
             return true;
         } else {
             return false;
         }
     }
-    static String readALine(Scanner scanner, Stack<locations> followedPath, boolean []shouldBreak, User currentUser){
+    static String  removeRedundantSpace(String st){
+        return st.replaceAll("^[ \t]+|[ \t]+$", "");
+    }
+    static String readALine(Scanner scanner, Stack<locations> followedPath, boolean []shouldBreak){
+        System.out.println("Enter your command:");
         String command = scanner.nextLine();
-        command = command.replaceAll("^[ \t]+|[ \t]+$", "");
-        shouldBreak[0] = inputGeneralCommandHandling(command, followedPath, currentUser);
+        command = removeRedundantSpace(command);
+        shouldBreak[0] = inputGeneralCommandHandling(command, followedPath);
         return command;
     }
     static void invalidCommandPrint(String commandToHandle, Stack<locations> followedPath){
         System.out.println("Invalid command. Try again.");
         System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
                 commandToHandle, Commands.getCurrentLevelCommands(followedPath.peek())));
+        String [] splittedCommand = commandToHandle.split(" ");
+        if (splittedCommand.length > 1)
+        System.out.println("Or Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                splittedCommand[0], Commands.getCurrentLevelCommands(followedPath.peek())));
     }
+    static void detailACard(String commandToHandle){
+        String cardName = removeRedundantSpace(commandToHandle.substring(6));
+        try {
+            currentUser.printCardInformation(cardName);
+            user_logger.info("Command: detail " + cardName);
+        } catch (Exception e){
+            user_logger.info("Command: detail + " +cardName + "\nError. Card name incorrect.");
+            System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                    cardName, currentUser.getAllCards()));
+        }
+    }
+
     public static void main(String[] args) {
         boolean flag = Main_config_file.createRequiredDirectories();
         if(!flag){
@@ -85,7 +145,7 @@ public class CLI {
         followedPath.push(locations.gameEntry);
         String  password;
         boolean []shouldBreak = {false};
-        User currentUser = null;
+
 
         System.out.println("\t\t\t\t\tWelcome to my Hearthstone." +
                 "\n Sorry for the inconvenience that you are forced to work" +
@@ -106,7 +166,7 @@ public class CLI {
                         break outer;
                     case gameEntry:
                         currentUser = null;
-                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         if (commandToHandle.equals("n") || commandToHandle.equals("no")
                                 || commandToHandle.equals("No") || commandToHandle.equals("N")){
@@ -123,10 +183,10 @@ public class CLI {
                     case enterCredentials:
                         currentUser = null;
                         System.out.println("Username:");
-                        username = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        username = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         System.out.println("Password:");
-                        password = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        password = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         currentUser = userLogIn(username, password);
                         if (currentUser != null) {
@@ -144,14 +204,14 @@ public class CLI {
                         currentUser = null;
                         System.out.println(PasswordUsername.passwordFormat);
                         System.out.println("Username:");
-                        username = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        username = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         boolean usernameNotTaken = PasswordUsername.CheckUsernameValidity(username);
                         if (!usernameNotTaken) {
                             break;
                         }
                         System.out.println("Password:");
-                        password = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        password = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         boolean passwordFormatCheck = false;
                         while (!passwordFormatCheck) {
@@ -164,14 +224,14 @@ public class CLI {
                                 user_logger = LoggingClass.getUserLogger();
                                 break;
                             }
-                            password = readALine(scanner, followedPath, shouldBreak, currentUser);
+                            password = readALine(scanner, followedPath, shouldBreak);
                             if (shouldBreak[0]) break;
                         }
                         main_logger.info("The current Balance of the user " + currentUser.getWalletBalance());
                         main_logger.info("Your current hero: " + currentUser.getCurrentHeroName() +
                                 " with hero level: " + currentUser.getHeroLevel());
                         main_logger.info("The cards in your heroes deck:\n"
-                                + currentUser.getCardsInDeck());
+                                + currentUser.getCardsInDeckString());
                         while (true) {
                             System.out.println("If you wish to see the details of your current cards, enter y, otherwise," +
                                     " enter n to continue to the user panel");
@@ -183,7 +243,7 @@ public class CLI {
                             else if (commandToHandle.equals("y") || commandToHandle.equals("Y")
                                     || commandToHandle.equals("Yes") || commandToHandle.equals("yes")){
                                 user_logger.info("Command: view deck cards after user creation.");
-                                currentUser.printDeckCards();
+                                currentUser.printDeckCardsWithDetails();
                                 break;
                             } else {
                                 System.out.println("Invalid input. Try again.");
@@ -195,7 +255,7 @@ public class CLI {
                                 "your collections, user settings, hero settings, card manipulation " +
                                 "and in future versions, the arena. Enter your command:");
 
-                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if(shouldBreak[0]) break;
                         switch (commandToHandle){
                             case "store":
@@ -203,24 +263,24 @@ public class CLI {
                                 followedPath.push(locations.store);
                                 break;
                             case "collection":
-                                user_logger.info("Navigation: collections");
-                                followedPath.push(locations.store);
+                                user_logger.info("Navigation: collection");
+                                followedPath.push(locations.collectionsAndDeck);
                                 break;
                             case "hero":
                                 user_logger.info("Navigation: hero");
-                                followedPath.push(locations.store);
+                                followedPath.push(locations.hero);
                                 break;
                             case "cardEnhFab":
                                 user_logger.info("Navigation: cardEnhFab");
-                                followedPath.push(locations.store);
+                                followedPath.push(locations.cardFabricationAndEnhancement);
                                 break;
                             case "userSet":
                                 user_logger.info("Navigation: userSet");
-                                followedPath.push(locations.store);
+                                followedPath.push(locations.userSettings);
                                 break;
                             case "wheelOfFortune":
                                 user_logger.info("Navigation: wheelOfFortune");
-                                followedPath.push(locations.store);
+                                followedPath.push(locations.wheelOfFortune);
                                 break;
                             case "play":
                                 System.out.println("This section has not yet been implemented.");
@@ -230,7 +290,7 @@ public class CLI {
                         }
                         break ;
                     case store:
-                        commandToHandle = readALine(scanner, followedPath, shouldBreak, currentUser);
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if(shouldBreak[0]) break;
                         switch (commandToHandle){
                             case "wallet":
@@ -256,8 +316,8 @@ public class CLI {
                                 break inner;
                         }
                         if(commandToHandle.contains("buySingle")){
-                            String cardName = commandToHandle.substring(9)
-                                    .replaceAll("^[ \t]+|[ \t]+$", "");
+                            String cardName = removeRedundantSpace(commandToHandle.substring(9));
+
                             int result = currentUser.buyCard(cardName);
                             switch (result){
                                 case 404:
@@ -277,11 +337,12 @@ public class CLI {
                                 case 200:
                                     user_logger.info("Command: buySingle " + cardName +
                                             "\nPurchase successful.");
+                                    currentUser.serializeUser();
                                     break inner;
                             }
                         } else if (commandToHandle.contains("sell")){
-                            String cardName = commandToHandle.substring(4)
-                                    .replaceAll("^[ \t]+|[ \t]+$", "");
+                            String cardName = removeRedundantSpace(commandToHandle.substring(4));
+
                             int result = currentUser.sellCard(cardName);
                             switch (result){
                                 case 404:
@@ -302,30 +363,157 @@ public class CLI {
                                 case 200:
                                     user_logger.info("Command: sell " + cardName +
                                             "\nTransaction Successful");
+                                    currentUser.serializeUser();
                                     break inner;
                             }
                         } else if (commandToHandle.contains("detail")) {
-                            String cardName = commandToHandle.substring(6)
-                                    .replaceAll("^[ \t]+|[ \t]+$", "");
-                            try {
-                                currentUser.printCardInformation(cardName);
-                                user_logger.info("Command: detail " + cardName);
-                            } catch (Exception e){
-                                user_logger.info("Command: detail + " +cardName + "\nError. Card name incorrect.");
-                                System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
-                                        cardName, currentUser.getAllCards()));
-                            }
+                            detailACard(commandToHandle);
                         }else if (commandToHandle.contains("buyPack")){
+                            user_logger.info("Command: buyPack");
                             System.out.println("This section has not yet been implemented.");
+                            //currentUser.serializeUser();
+                            break ;
+
                         } else {
                             invalidCommandPrint(commandToHandle, followedPath);
                         }
                         break ;
                     case collectionsAndDeck:
+                        System.out.println("Welcome to the collections. Here you can edit your deck.\n " +
+                                "Your deck has a limit of " + currentUser.getDeckSize() + " and it cannot in any way " +
+                                "exceed this amount.\nThus to add a card to your deck, you must first make an " +
+                                "empty slot.\nTo ensure that your deck stays full, your changes will only be " +
+                                "executed every time the deck is at its full capacity");
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
+                        // PAY ATTENTION TO THE LINE BELOW IN FUTURE CHAGNES.
+
+                        if (cloneUser == null) {
+                            try {
+                                cloneUser = currentUser.clone();
+                            } catch (CloneNotSupportedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(shouldBreak[0]) break;
+                        switch (commandToHandle){
+                            case "listDeck":
+                                user_logger.info("Command: listDeck");
+                                System.out.println(cloneUser.getCardsInDeckString());
+                                break inner;
+                            case "listAll":
+                                user_logger.info("Command: listAll");
+                                cloneUser.printAvailableCards();
+                                break inner;
+                            case "listAddable":
+                                user_logger.info("Command: listAddable");
+                                System.out.println(cloneUser.getAddableCards());
+                                break inner;
+                            case "ls":
+                                user_logger.info("Command: ls");
+                                System.out.println("Printing all available cards.");
+                                cloneUser.printAvailableCards();
+                                break inner;
+                        }
+                        if (commandToHandle.contains("detail")){
+                            detailACard(commandToHandle);
+                        } else if(commandToHandle.contains("add")){
+                            String cardName = removeRedundantSpace(commandToHandle.substring(3));
+                            int result = cloneUser.addToDeck(cardName);
+                            switch (result) {
+                                case 404:
+                                    user_logger.info("Command: add " + cardName +
+                                            "\nError. Card name is wrong");
+                                    System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                            cardName, currentUser.getAllCards()));
+                                    break inner;
+                                case 401:
+                                    user_logger.info("Command: add " + cardName + "\nError. You do not own this card.");
+                                    break inner;
+                                case 409:
+                                    user_logger.info("Command: add " + cardName + "\nError. The deck is at full capacity.");
+                                    break inner;
+                                case 403:
+                                    user_logger.info("Command: add " + cardName + "\nError. Maximum instances of card in deck reached.");
+                                    break inner;
+                                case 200:
+                                    user_logger.info("Command: add " + cardName + "\nSuccessful.");
+                                    if (cloneUser.currentNumberOfCardsInDeck() == cloneUser.getDeckSize()) {
+                                        cloneUser.serializeUser();
+                                        currentUser = User.deserializeUser(currentUser.getUsername(), currentUser.getUserID());
+                                    }
+                                    break inner;
+                            }
+
+                        } else if(commandToHandle.contains("remove")){
+                            String cardName = removeRedundantSpace(commandToHandle.substring(6));
+                            int result = cloneUser.removeFromDeck(cardName);
+                            switch (result){
+                                case 404:
+                                    user_logger.info("Command: remove " + cardName +
+                                            "\nError. Card name is wrong");
+                                    System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                            cardName, currentUser.getAllCards()));
+                                    break inner;
+                                case 401:
+                                    user_logger.info("Command: remove " + cardName + "\nError. You do not own this card.");
+                                    break inner;
+                                case 406:
+                                    user_logger.info("Command: remove " + cardName + "\nError. The deck is empty.");
+                                    break inner;
+                                case 403:
+                                    user_logger.info("Command: remove " + cardName + "\nError. No instances of card in deck.");
+                                    break inner;
+                                case 200:
+                                    user_logger.info("Command: remove " + cardName + "\nSuccessful. Don't forget to add a card.");
+                                    break inner;
+                            }
+                        } else {
+                            invalidCommandPrint(commandToHandle, followedPath);
+                        }
+
                         break ;
                     case hero:
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
+                        if(shouldBreak[0]) break;
+                        switch (commandToHandle){
+                            case "upHero":
+                                user_logger.info("Command: upHero");
+                                System.out.println("This section has not yet been implemented.");
+                                break inner;
+                            case "ls":
+                                user_logger.info("Command: ls");
+                                currentUser.printAllHeroesInformation();
+                                System.out.println("Current hero: " + currentUser.getCurrentHeroName());
+                                break inner;
+                        }
+                        if (commandToHandle.contains("chHero")){
+                            String heroName = removeRedundantSpace(commandToHandle.substring(6));
+                            int result = currentUser.changeHero(heroName);
+                            switch (result){
+                                case 404:
+                                    user_logger.info("Command chHero " + heroName + "\nError. Hero name incorrect.");
+                                    System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
+                                            heroName, currentUser.getHeroNames()));
+                                    break inner;
+                                case 400:
+                                    user_logger.info("Command chHero " + heroName + "\nError. Hero already selected.");
+                                    break inner;
+                                case 200:
+                                    user_logger.info("Command chHero " + heroName + "\nSuccessful.");
+                                    currentUser.serializeUser();
+                                    break inner;
+                            }
+                        } else {
+                            invalidCommandPrint(commandToHandle, followedPath);
+                        }
                         break;
                     case userSettings:
+                        /*
+                        else {
+                        invalidCommandPrint(commandToHandle, followedPath);
+                        }
+
+                         */
                         break;
                     case cardFabricationAndEnhancement:
                         System.out.println("This section has not yet been implemented");
@@ -340,8 +528,6 @@ public class CLI {
             }
         } finally {
             // Serialize USER if it is open
-
-
             main_logger.info("Exiting");
 
             LoggingClass.closeMainLogger();

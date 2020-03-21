@@ -22,7 +22,7 @@ public class Hero implements Serializable {
     private int maxHealth;
     private int currentHealth;
     private int shield;
-    private int numberOfCardsToKeepInDeck = 20;
+    private int deckSize = 20;
     private int currentNumberOfCardsInDeck = 20;
     private int maximumInstanceOfEachCard = 2;
     private ArrayList<String> allCards = new ArrayList<>(); // This will hold all neutral cards plus this heros
@@ -111,54 +111,56 @@ public class Hero implements Serializable {
         availableCards.remove(cardName);
         return 200;
     }
-    public boolean addToDeck(String cardName){
+    public int addToDeck(String cardName){
         if (!cardInAllCards(cardName)){
             main_logger.info("Error. The entered card name is not in the list of cards of the game.");
-            return false;
+            return 404;
         }
         if(!cardInAvailableCards(cardName)){
             main_logger.info("You do not own this card. You can buy it at the store.");
-            return false;
+            return 401;
         }
-        if (currentNumberOfCardsInDeck == numberOfCardsToKeepInDeck) {
+        if (currentNumberOfCardsInDeck == deckSize) {
             main_logger.info("The deck is at full capacity. First remove a card.");
-            return false;
+            return 409;
         }
         int recurrence = cardInDeck(cardName);
         if (recurrence == 2){
             main_logger.info("There are already 2 instances of this card in your deck");
-            return false;
+            return 403;
         }
         deckCards.put(cardName, recurrence + 1);
-        return true;
+        return 200;
     }
-    public boolean removeFromDeck(String cardName){
+    public int removeFromDeck(String cardName){
         if (!cardInAllCards(cardName)){
             main_logger.info("Error. The entered card name is not in the list of cards of the game.");
-            return false;
+            return 404;
         }
         if(!cardInAvailableCards(cardName)){
             main_logger.info("You do not own this card. You can buy it at the store.");
-            return false;
+            return 401;
         }
         if (currentNumberOfCardsInDeck == 0) {
             main_logger.info("The deck is already empty.");
-            return false;
+            return 406;
         }
         int recurrence = cardInDeck(cardName);
         if (recurrence == 0){
             main_logger.info("There are no instances of this card in your deck.");
-            return false;
+            return 403;
         }
         if (recurrence ==1) {
             deckCards.remove(cardName);
+            currentNumberOfCardsInDeck -= 1;
             main_logger.info("Removed card from deck.");
-            return true;
+            return 200;
         }
         deckCards.remove(cardName);
         deckCards.put(cardName,1);
+        currentNumberOfCardsInDeck -= 1;
         main_logger.info("Removed 1 instance of the card from the deck. 1 remaining.");
-        return true;
+        return 200;
     }
 
     private void setHealth(){
@@ -234,6 +236,11 @@ public class Hero implements Serializable {
     public int getNumberOfCardsOwnedByHero() {
         return numberOfCardsOwnedByHero;
     }
+
+    public int getDeckSize() {
+        return deckSize;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -250,6 +257,16 @@ public class Hero implements Serializable {
         ArrayList<String> complementAvailable = new ArrayList<>(allCards);
         complementAvailable.removeAll(availableCards);
         return complementAvailable;
+    }
+    public ArrayList<String> getAddableCards(){
+        ArrayList<String> addableCards = new ArrayList<>(availableCards);
+        ArrayList<String> cloneAddable = new ArrayList<>(addableCards);
+        for (String st:cloneAddable){
+            if ((int)deckCards.get(st) == maximumInstanceOfEachCard) {
+                addableCards.remove(st);
+            }
+        }
+        return addableCards;
     }
     public int getCurrentNumberOfCardsInDeck() {
         return currentNumberOfCardsInDeck;

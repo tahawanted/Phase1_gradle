@@ -27,7 +27,13 @@ public class UserFunctions {
                     " user list but now I couldn't find it.");
             return null;
         }
+
+        User returnUser = null;
+
+         returnUser = User.deserializeUser(username, userID);
+         if (returnUser == null) return null;
         // instantiate the user logger.
+
         Logger user_logger = LoggingClass.getUserLogger(username, userID);
         try {
             user_logger.info("Log in.");
@@ -37,7 +43,7 @@ public class UserFunctions {
             return null;
         }
         //LOAD THE GOD DAMN USER DATA.
-        return User.deserializeUser(username, userID);
+        return returnUser;
     }
     public static User userLogOut(User user){
         Logger user_logger = LoggingClass.getUserLogger();

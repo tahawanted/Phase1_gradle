@@ -1,0 +1,8 @@
+Mar 21, 2020 1:57:28 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 1:57:28 PM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 1:57:52 PM Hero.Hero removeFromDeck
+INFO: Removed 1 instance of the card from the deck. 1 remaining.
+Mar 21, 2020 1:58:16 PM CLI.CLI main
+INFO: Exiting

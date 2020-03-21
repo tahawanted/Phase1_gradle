@@ -45,7 +45,7 @@ public class User implements Serializable {
 
 
 
-    public void changeHero(String heroName){
+    public int changeHero(String heroName){
         int index = -1;
         for (int i = 0; i<heroes.size(); i++){
             if (heroes.get(i).getName().equals(heroName)) {
@@ -55,14 +55,15 @@ public class User implements Serializable {
         }
         if (index == -1) {
             main_logger.info("Error. The provided hero name is incorrect.");
-            return;
+            return 404;
         }
         if (currentHeroIndex == index) {
             main_logger.info("Error/Warning. The provided hero is already selected. Returning.");
-            return;
+            return 400;
         }
         currentHeroIndex = index;
         main_logger.info("Successfully changed hero to " + heroes.get(index).getName());
+        return 200;
     }
 
     public int buyCard(String cardName){
@@ -71,10 +72,10 @@ public class User implements Serializable {
     public int sellCard(String cardName){
         return heroes.get(currentHeroIndex).sellCard(cardName, this);
     }
-    public boolean addToDeck(String cardName){
+    public int addToDeck(String cardName){
         return heroes.get(currentHeroIndex).addToDeck(cardName);
     }
-    public boolean removeFromDeck(String cardName){
+    public int removeFromDeck(String cardName){
         return heroes.get(currentHeroIndex).removeFromDeck(cardName);
     }
 
@@ -106,7 +107,7 @@ public class User implements Serializable {
     public ArrayList<String> getComplementAvailableCards(){
         return heroes.get(currentHeroIndex).getComplementAvailableCards();
     }
-    public String getCardsInDeck(){
+    public String getCardsInDeckString(){
         JSONObject deckCards = heroes.get(currentHeroIndex).getDeckCards();
         return FileFunctions.prettyJsonString(deckCards);
     }
@@ -122,6 +123,9 @@ public class User implements Serializable {
     public int currentNumberOfCardsInDeck(){
         return heroes.get(currentHeroIndex).getCurrentNumberOfCardsInDeck();
     }
+    public int getDeckSize(){
+        return heroes.get(currentHeroIndex).getDeckSize();
+    }
     public void printCardInformation(String cardName){
         System.out.println(FileFunctions.prettyJsonString(
                 cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName)).getCardJsonObject()));
@@ -129,15 +133,52 @@ public class User implements Serializable {
     public void printCardInformation(ArrayList<String> cardNames){
         for (String cardName: cardNames) printCardInformation(cardName);
     }
-    public void printDeckCards(){
+    public void printDeckCardsWithDetails(){
         for (Object st:heroes.get(currentHeroIndex).getDeckCards().keySet()){
             printCardInformation(st.toString());
         }
     }
+    public void printAllHeroesInformation(){
+        for (Hero tempHero: heroes){
+            System.out.println("Hero name: " + tempHero.getName());
+            System.out.println("Description:\n" + tempHero.getDescription());
+        }
+    }
+
     public void printAvailableCards(){
         printCardInformation(getAvailableCards());
     }
     public void printBuyableCards(){
         printCardInformation(getComplementAvailableCards());
+    }
+    public ArrayList<String> getAddableCards(){
+        return heroes.get(currentHeroIndex).getAddableCards();
+    }
+    @Override
+    public User clone() throws CloneNotSupportedException {
+        return deserializeUser(username, userID);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+    public ArrayList<String> getHeroNames(){
+        ArrayList<String> names = new ArrayList<>();
+        for(Hero tempHero:heroes){
+            names.add(tempHero.getName());
+        }
+        return names;
     }
 }
