@@ -1,6 +1,5 @@
 package User;
 
-import Card.Cards;
 import ConfigSettings.Main_config_file;
 import Hero.Hero;
 import LoggingModule.LoggingClass;
@@ -12,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import static ColorCommandLine.ColorCommandLine.*;
 import static Utility.SerializationFunctions.*;
 
 public class User implements Serializable {
@@ -21,7 +21,6 @@ public class User implements Serializable {
     private int walletBalance;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private int currentHeroIndex;
-    transient static Logger main_logger = LoggingClass.getMainLoggerInstance();
     User(String username, long userID, String hashedPassword){
         this.username = username;
         this.userID = userID;
@@ -45,7 +44,7 @@ public class User implements Serializable {
 
 
 
-    public int changeHero(String heroName){
+    public int changeHero(String heroName, Logger user_logger){
         int index = -1;
         for (int i = 0; i<heroes.size(); i++){
             if (heroes.get(i).getName().equals(heroName)) {
@@ -54,15 +53,15 @@ public class User implements Serializable {
             }
         }
         if (index == -1) {
-            main_logger.info("Error. The provided hero name is incorrect.");
+            user_logger.info("Error. The provided hero name is incorrect.");
             return 404;
         }
         if (currentHeroIndex == index) {
-            main_logger.info("Error/Warning. The provided hero is already selected. Returning.");
+            user_logger.info("Error/Warning. The provided hero is already selected. Returning.");
             return 400;
         }
         currentHeroIndex = index;
-        main_logger.info("Successfully changed hero to " + heroes.get(index).getName());
+        user_logger.info("Successfully changed hero to " + heroes.get(index).getName());
         return 200;
     }
 
@@ -127,7 +126,8 @@ public class User implements Serializable {
         return heroes.get(currentHeroIndex).getDeckSize();
     }
     public void printCardInformation(String cardName){
-        System.out.println(FileFunctions.prettyJsonString(
+        Logger user_logger = LoggingClass.getUserLogger();
+        user_logger.info(FileFunctions.prettyJsonString(
                 cardDeserialize(Main_config_file.returnCardSaveDataLocation(cardName)).getCardJsonObject()));
     }
     public void printCardInformation(ArrayList<String> cardNames){
@@ -139,9 +139,10 @@ public class User implements Serializable {
         }
     }
     public void printAllHeroesInformation(){
+        Logger user_logger = LoggingClass.getUserLogger();
         for (Hero tempHero: heroes){
-            System.out.println("Hero name: " + tempHero.getName());
-            System.out.println("Description:\n" + tempHero.getDescription());
+            user_logger.info(GREEN + "Hero" + RESET + " name: " + tempHero.getName());
+            user_logger.info("Description:\n" + tempHero.getDescription());
         }
     }
 

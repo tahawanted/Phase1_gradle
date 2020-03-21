@@ -10,6 +10,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+
+
 public class LoggingClass {
     private static final Logger main_logger = Logger.getLogger("main_logger");
     private static final Logger user_logger = Logger.getLogger("user_logger");

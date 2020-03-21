@@ -12,6 +12,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import static ColorCommandLine.ColorCommandLine.CYAN_BOLD;
+import static ColorCommandLine.ColorCommandLine.RESET;
 import static Utility.SerializationFunctions.cardDeserialize;
 
 public class Hero implements Serializable {
@@ -67,14 +69,15 @@ public class Hero implements Serializable {
 
 
     public int buyCard(String cardName, User user){
+        Logger user_logger = LoggingClass.getUserLogger();
         // The current implementation uses the fact that complement cards are created when this command is called
         // and using this, prevents buying cards already in you available cards
          if (!cardInAllCards(cardName)){
-             main_logger.info("Error. The entered card name is not in the list of cards of the game.");
+             user_logger.info(CYAN_BOLD + "Error." + RESET + " The entered card name is not in the list of cards of the game.");
              return 404;
          }
         if (!cardInComplementAvailableCards(cardName)){
-            main_logger.info("Error. You already own this card");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " You already own this card");
             return 400;
         }
 
@@ -83,26 +86,27 @@ public class Hero implements Serializable {
         int price = tempCard.getPrice();
         int currentBalance = user.getWalletBalance();
         if (price > currentBalance){
-            main_logger.info("Error. Insufficient balance");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " Insufficient balance");
             return 402;
         }
         // If wallet balance is also ok, reduce the card cost from the balance
         user.setWalletBalance(currentBalance - price);
         availableCards.add(cardName);
-        main_logger.info("Purchase successful. Card added to your collection.");
+        user_logger.info(CYAN_BOLD + "Purchase successful." + RESET + " Card added to your collection.");
         return 200;
     }
     public int sellCard(String cardName, User user){
+        Logger user_logger = LoggingClass.getUserLogger();
         if (!cardInAllCards(cardName)){
-            main_logger.info("Error. The entered card name is not in the list of cards of the game.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " The entered card name is not in the list of cards of the game.");
             return 404;
         }
         if (!cardInAvailableCards(cardName)){
-            main_logger.info("Error. You currently don't own this card.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " You currently don't own this card.");
             return 401;
         }
         if (cardInDeck(cardName) > 0){
-            main_logger.info("Error. The card you want to sell is in your deck. First remove it from your deck");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " The card you want to sell is in your deck. First remove it from your deck");
             return 403;
         }
         // ADD TO WALLET BALANCE
@@ -112,21 +116,22 @@ public class Hero implements Serializable {
         return 200;
     }
     public int addToDeck(String cardName){
+        Logger user_logger = LoggingClass.getUserLogger();
         if (!cardInAllCards(cardName)){
-            main_logger.info("Error. The entered card name is not in the list of cards of the game.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " The entered card name is not in the list of cards of the game.");
             return 404;
         }
         if(!cardInAvailableCards(cardName)){
-            main_logger.info("You do not own this card. You can buy it at the store.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " You do not own this card. You can buy it at the store.");
             return 401;
         }
         if (currentNumberOfCardsInDeck == deckSize) {
-            main_logger.info("The deck is at full capacity. First remove a card.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " The deck is at full capacity. First remove a card.");
             return 409;
         }
         int recurrence = cardInDeck(cardName);
         if (recurrence == 2){
-            main_logger.info("There are already 2 instances of this card in your deck");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " There are already 2 instances of this card in your deck");
             return 403;
         }
         deckCards.put(cardName, recurrence + 1);
@@ -134,33 +139,34 @@ public class Hero implements Serializable {
         return 200;
     }
     public int removeFromDeck(String cardName){
+        Logger user_logger = LoggingClass.getUserLogger();
         if (!cardInAllCards(cardName)){
-            main_logger.info("Error. The entered card name is not in the list of cards of the game.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " The entered card name is not in the list of cards of the game.");
             return 404;
         }
         if(!cardInAvailableCards(cardName)){
-            main_logger.info("You do not own this card. You can buy it at the store.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + " You do not own this card. You can buy it at the store.");
             return 401;
         }
         if (currentNumberOfCardsInDeck == 0) {
-            main_logger.info("The deck is already empty.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + "The deck is already empty.");
             return 406;
         }
         int recurrence = cardInDeck(cardName);
         if (recurrence == 0){
-            main_logger.info("There are no instances of this card in your deck.");
+            user_logger.info(CYAN_BOLD + "Error." + RESET + "There are no instances of this card in your deck.");
             return 403;
         }
         if (recurrence ==1) {
             deckCards.remove(cardName);
             currentNumberOfCardsInDeck -= 1;
-            main_logger.info("Removed card from deck.");
+            user_logger.info(CYAN_BOLD + "Successful." + RESET + " Removed card from deck.");
             return 200;
         }
         deckCards.remove(cardName);
         deckCards.put(cardName,1);
         currentNumberOfCardsInDeck -= 1;
-        main_logger.info("Removed 1 instance of the card from the deck. 1 remaining.");
+        user_logger.info(CYAN_BOLD + "Successful." + RESET + " Removed 1 instance of the card from the deck. 1 remaining.");
         return 200;
     }
 

@@ -1,0 +1,88 @@
+Mar 21, 2020 11:58:04 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter [1;36my[0m if this is a first run or if the cards have changed. Else, enter [1;36mn[0m:
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:58:14 PM CLI.CLI main
+INFO: Instantiated all cards
+Mar 21, 2020 11:58:14 PM CLI.CLI main
+INFO: [1;36mGame Entry:[0m
+Mar 21, 2020 11:58:34 PM CLI.CLI main
+INFO: [1;36mCreate user:[0m
+Mar 21, 2020 11:58:45 PM User.createUser createAUser
+INFO: Assigning userID 0
+Mar 21, 2020 11:58:45 PM User.createUser createAUser
+INFO: Creating user. Username: taha
+Mar 21, 2020 11:58:45 PM User.createUser createAUser
+INFO: Creating user log
+Mar 21, 2020 11:58:45 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 21, 2020 11:58:45 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 21, 2020 11:58:45 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 11:59:53 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 22, 2020 12:00:42 AM Utility.SerializationFunctions cardDeserialize
+INFO: src\main\java\SaveData\Cards\Worgen Inflitrator.ser (The system cannot find the file specified)
+Mar 22, 2020 12:01:01 AM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@4883b407
+Mar 22, 2020 12:01:01 AM CLI.CLI main
+INFO: No line found
+Mar 22, 2020 12:01:01 AM CLI.CLI main
+INFO: Exiting
