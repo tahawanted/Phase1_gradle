@@ -1,0 +1,44 @@
+Mar 21, 2020 7:56:19 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 7:56:23 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:56:25 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:56:32 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:56:32 PM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 7:56:32 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:56:38 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:56:41 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:56:51 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:56:51 PM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user fatemeh
+Mar 21, 2020 7:56:51 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:57:04 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:57:04 PM User.DeleteUser deleteUser
+INFO: Deleting user fatemeh
+Mar 21, 2020 7:57:04 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:57:04 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:57:04 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:57:14 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:57:18 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:57:26 PM User.UserFunctions userLogIn
+INFO: Error. No such user; or user has been deleted.
+Mar 21, 2020 7:57:26 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:57:51 PM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@4f933fd1
+Mar 21, 2020 7:57:51 PM CLI.CLI main
+INFO: No line found

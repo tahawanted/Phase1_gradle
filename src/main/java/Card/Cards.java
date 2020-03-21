@@ -70,12 +70,16 @@ public class Cards{
             switch (rarity){
                 case "Common":
                     price = 10;
+                    break;
                 case "Rare":
                     price = 20;
+                    break;
                 case "Epic":
                     price = 30;
+                    break;
                 case "Legendary":
                     price = 40;
+                    break;
             }
         }
         public String getName() {

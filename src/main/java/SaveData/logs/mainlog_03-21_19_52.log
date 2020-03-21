@@ -1,0 +1,86 @@
+Mar 21, 2020 7:52:28 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 7:52:31 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:52:33 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:52:43 PM User.UserFunctions userLogIn
+INFO: Error. No such user; or user has been deleted.
+Mar 21, 2020 7:52:43 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:52:50 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:52:50 PM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user fatemeh
+Mar 21, 2020 7:52:50 PM User.UserFunctions userLogIn
+INFO: Password incorrect.
+Mar 21, 2020 7:52:50 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:53:00 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:53:00 PM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 7:53:00 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:53:06 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:53:10 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:53:13 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:53:23 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:53:23 PM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user fatemeh
+Mar 21, 2020 7:53:23 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:53:31 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:53:31 PM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user fatemeh
+Mar 21, 2020 7:53:31 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:53:33 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:53:43 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:53:53 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:53:53 PM User.PasswordUsername ChangePassword
+INFO: Password change successful.
+Mar 21, 2020 7:53:53 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:53:53 PM CLI.CLI main
+INFO: User settings:
+Mar 21, 2020 7:55:33 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:55:34 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:55:43 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:55:49 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:55:50 PM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 7:55:50 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:55:54 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:55:54 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:55:58 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:56:05 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:56:05 PM User.PasswordUsername PasswordValidityCheck
+INFO: Incorrect password entered for user fatemeh
+Mar 21, 2020 7:56:05 PM User.UserFunctions userLogIn
+INFO: Password incorrect.
+Mar 21, 2020 7:56:05 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:56:17 PM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@464bee09
+Mar 21, 2020 7:56:17 PM CLI.CLI main
+INFO: No line found
+Mar 21, 2020 7:56:17 PM CLI.CLI main
+INFO: Exiting

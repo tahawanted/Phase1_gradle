@@ -181,4 +181,16 @@ public class User implements Serializable {
         }
         return names;
     }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public int getCurrentHeroIndex() {
+        return currentHeroIndex;
+    }
 }

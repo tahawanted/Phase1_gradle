@@ -1,5 +1,6 @@
 package CLI;
 
+import Card.InitiateCards;
 import ConfigSettings.Main_config_file;
 import LoggingModule.LoggingClass;
 import User.PasswordUsername;
@@ -11,6 +12,9 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Logger;
 
+import static User.DeleteUser.deleteUser;
+import static User.PasswordUsername.ChangePassword;
+import static User.PasswordUsername.PasswordValidityCheck;
 import static User.UserFunctions.userLogIn;
 import static User.UserFunctions.userLogOut;
 
@@ -19,7 +23,7 @@ public class CLI {
         preGameEntry, gameEntry, createUser, userPanel, store, collectionsAndDeck, hero,
         cardFabricationAndEnhancement, userSettings, wheelOfFortune, enterCredentials
     }
-    private static Logger main_logger = LoggingClass.getMainLoggerInstance();
+    private static Logger main_logger;
     private static Logger user_logger = null;
     private static String username; // Logged in as.
 
@@ -69,7 +73,9 @@ public class CLI {
                 cloneUser = null;
             }
             user_logger.info("Command: exit");
-            userLogOut(currentUser);
+            cloneUser = null;
+            if (currentUser != null)
+                currentUser = userLogOut(currentUser);
             for (int i = followedPath.size(); i>2; i--){
                 followedPath.pop();
             }
@@ -138,8 +144,17 @@ public class CLI {
             System.out.println("Error could not create the directories");
             return;
         }
+        main_logger =  LoggingClass.getMainLoggerInstance();
         Scanner scanner = new Scanner(System.in);
         String commandToHandle;
+        main_logger.info("Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:");
+        commandToHandle = scanner.nextLine();
+        if (commandToHandle.equals("y") || commandToHandle.equals("Y")
+                || commandToHandle.equals("Yes") || commandToHandle.equals("yes")){
+            InitiateCards.InstantiateAllCards();
+            main_logger.info("Instantiated all cards");
+        }
+        commandToHandle = "help";
         Stack<locations> followedPath = new Stack<>();
         followedPath.push(locations.preGameEntry);
         followedPath.push(locations.gameEntry);
@@ -155,17 +170,21 @@ public class CLI {
                 "\nIf you already have an account, enter y, otherwise enter n:");
 
         try {
-
-            // HELP is not implemented
-
-
             outer: while (true) {
                 inner: switch (followedPath.peek()){
                     case preGameEntry:
+                        main_logger.info("Pre Game Entry:");
                         currentUser = null;
                         break outer;
                     case gameEntry:
+                        cloneUser = null;
+                        main_logger.info("Game Entry:");
                         currentUser = null;
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if (shouldBreak[0]) break;
                         if (commandToHandle.equals("n") || commandToHandle.equals("no")
@@ -181,6 +200,7 @@ public class CLI {
                         break;
 
                     case enterCredentials:
+                        main_logger.info("Enter your credentials");
                         currentUser = null;
                         System.out.println("Username:");
                         username = readALine(scanner, followedPath, shouldBreak);
@@ -201,6 +221,7 @@ public class CLI {
                         }
                         break;
                     case createUser:
+                        main_logger.info("Create user:");
                         currentUser = null;
                         System.out.println(PasswordUsername.passwordFormat);
                         System.out.println("Username:");
@@ -232,6 +253,7 @@ public class CLI {
                                 " with hero level: " + currentUser.getHeroLevel());
                         main_logger.info("The cards in your heroes deck:\n"
                                 + currentUser.getCardsInDeckString());
+
                         while (true) {
                             System.out.println("If you wish to see the details of your current cards, enter y, otherwise," +
                                     " enter n to continue to the user panel");
@@ -246,11 +268,13 @@ public class CLI {
                                 currentUser.printDeckCardsWithDetails();
                                 break;
                             } else {
-                                System.out.println("Invalid input. Try again.");
+                                System.out.println("Invalid input. Try again. Enter n for No and y for Yes.");
                             }
                         }
                         break;
                     case userPanel:
+                        cloneUser = null;
+                        main_logger.info("User panel:");
                         System.out.println("Welcome to the user panel. From here you can access the store, " +
                                 "your collections, user settings, hero settings, card manipulation " +
                                 "and in future versions, the arena. Enter your command:");
@@ -290,6 +314,7 @@ public class CLI {
                         }
                         break ;
                     case store:
+                        main_logger.info("Store:");
                         commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if(shouldBreak[0]) break;
                         switch (commandToHandle){
@@ -339,6 +364,10 @@ public class CLI {
                                             "\nPurchase successful.");
                                     currentUser.serializeUser();
                                     break inner;
+                                default:
+                                    main_logger.info("buyCard returned unexpected result. Exiting");
+                                    followedPath.push(locations.preGameEntry);
+                                    break inner;
                             }
                         } else if (commandToHandle.contains("sell")){
                             String cardName = removeRedundantSpace(commandToHandle.substring(4));
@@ -365,6 +394,10 @@ public class CLI {
                                             "\nTransaction Successful");
                                     currentUser.serializeUser();
                                     break inner;
+                                default:
+                                    main_logger.info("sellCard returned unexpected result. Exiting");
+                                    followedPath.push(locations.preGameEntry);
+                                    break inner;
                             }
                         } else if (commandToHandle.contains("detail")) {
                             detailACard(commandToHandle);
@@ -379,14 +412,15 @@ public class CLI {
                         }
                         break ;
                     case collectionsAndDeck:
+                        main_logger.info("Collection:");
                         System.out.println("Welcome to the collections. Here you can edit your deck.\n " +
                                 "Your deck has a limit of " + currentUser.getDeckSize() + " and it cannot in any way " +
                                 "exceed this amount.\nThus to add a card to your deck, you must first make an " +
                                 "empty slot.\nTo ensure that your deck stays full, your changes will only be " +
                                 "executed every time the deck is at its full capacity");
                         commandToHandle = readALine(scanner, followedPath, shouldBreak);
+                        if(shouldBreak[0]) break;
                         // PAY ATTENTION TO THE LINE BELOW IN FUTURE CHAGNES.
-
                         if (cloneUser == null) {
                             try {
                                 cloneUser = currentUser.clone();
@@ -394,7 +428,7 @@ public class CLI {
                                 e.printStackTrace();
                             }
                         }
-                        if(shouldBreak[0]) break;
+
                         switch (commandToHandle){
                             case "listDeck":
                                 user_logger.info("Command: listDeck");
@@ -424,7 +458,7 @@ public class CLI {
                                     user_logger.info("Command: add " + cardName +
                                             "\nError. Card name is wrong");
                                     System.out.println("Perhaps you meant: " + ClosestMatch.getClosestMatch(
-                                            cardName, currentUser.getAllCards()));
+                                            cardName, currentUser.getAllCards()) + "\n");
                                     break inner;
                                 case 401:
                                     user_logger.info("Command: add " + cardName + "\nError. You do not own this card.");
@@ -441,6 +475,10 @@ public class CLI {
                                         cloneUser.serializeUser();
                                         currentUser = User.deserializeUser(currentUser.getUsername(), currentUser.getUserID());
                                     }
+                                    break inner;
+                                default:
+                                    main_logger.info("add returned unexpected result. Exiting");
+                                    followedPath.push(locations.preGameEntry);
                                     break inner;
                             }
 
@@ -466,6 +504,10 @@ public class CLI {
                                 case 200:
                                     user_logger.info("Command: remove " + cardName + "\nSuccessful. Don't forget to add a card.");
                                     break inner;
+                                default:
+                                    main_logger.info("remove returned unexpected result. Exiting");
+                                    followedPath.push(locations.preGameEntry);
+                                    break inner;
                             }
                         } else {
                             invalidCommandPrint(commandToHandle, followedPath);
@@ -473,6 +515,8 @@ public class CLI {
 
                         break ;
                     case hero:
+                        main_logger.info("Hero:");
+                        System.out.println("" + currentUser.getCurrentHeroIndex() + "\n");
                         commandToHandle = readALine(scanner, followedPath, shouldBreak);
                         if(shouldBreak[0]) break;
                         switch (commandToHandle){
@@ -502,30 +546,103 @@ public class CLI {
                                     user_logger.info("Command chHero " + heroName + "\nSuccessful.");
                                     currentUser.serializeUser();
                                     break inner;
+                                default:
+                                    main_logger.info("chHero returned unexpected result. Exiting");
+                                    followedPath.push(locations.preGameEntry);
+                                    break inner;
                             }
                         } else {
                             invalidCommandPrint(commandToHandle, followedPath);
                         }
                         break;
                     case userSettings:
-                        /*
-                        else {
-                        invalidCommandPrint(commandToHandle, followedPath);
+                        main_logger.info("User settings:");
+                        commandToHandle = readALine(scanner, followedPath, shouldBreak);
+                        if(shouldBreak[0]) break;
+                        String passCheckResult;
+                        switch (commandToHandle){
+                            case "chPass":
+                                System.out.print("Enter the current password: ");
+                                String currentPassword = readALine(scanner, followedPath, shouldBreak);
+                                if(shouldBreak[0]) break inner;
+                                passCheckResult = PasswordValidityCheck(currentUser.getUsername(),
+                                        currentUser.getUserID(), currentPassword);
+                                switch (passCheckResult){
+                                    case "Correct":
+                                        break; // this is correct. must not break inner.
+                                    case "Incorrect":
+                                        user_logger.info("Command: chPass\nError. Password incorrect.");
+                                        break inner;
+                                    default:
+                                        main_logger.info("Password check returned unexpected result. Exiting");
+                                        followedPath.push(locations.preGameEntry);
+                                        break inner;
+                                }
+                                System.out.print("Enter the new password: ");
+                                String newPasswrod = readALine(scanner, followedPath, shouldBreak);
+                                if(shouldBreak[0]) break inner;
+                                int result = ChangePassword(currentUser.getUsername(), currentUser.getUserID(),
+                                        currentPassword, newPasswrod, currentUser);
+                                switch (result){
+                                    case 405:
+                                        user_logger.info("chPass \n Error. New password format is incorrect.");
+                                        break inner;
+                                    case 200:
+                                        user_logger.info("chPass\nSuccessful.");
+                                        currentUser.serializeUser();
+                                        break inner;
+                                    default:
+                                        user_logger.info("chPass\n ChangePassword function returned unexpected result. Exiting");
+                                        followedPath.push(locations.preGameEntry);
+                                }
+                                break inner;
+                            case "deleteUser":
+                                System.out.print("Enter your password:");
+                                String yourPassword = readALine(scanner, followedPath, shouldBreak);
+                                if(shouldBreak[0]) break inner;
+                                passCheckResult = PasswordValidityCheck(currentUser.getUsername(),
+                                        currentUser.getUserID(), yourPassword);
+                                switch (passCheckResult){
+                                    case "Correct":
+                                        break; // this is correct. must not break inner.
+                                    case "Incorrect":
+                                        user_logger.info("Command: deleteUser\nError. Password incorrect.");
+                                        break inner;
+                                    default:
+                                        main_logger.info("Password check returned unexpected result. Exiting");
+                                        followedPath.push(locations.preGameEntry);
+                                        break inner;
+                                }
+                                // RETURN VALUE
+                                deleteUser(currentUser.getUsername(), currentUser.getUserID());
+                                user_logger.info("Command: deleteUser\nSuccessful. Log in again to continue.");
+                                currentUser.serializeUser();
+                                user_logger.info("Command: exit");
+                                currentUser = userLogOut(currentUser);
+                                for (int i = followedPath.size(); i>2; i--){
+                                    followedPath.pop();
+                                }
+                                break inner;
+                            default:
+                                invalidCommandPrint(commandToHandle, followedPath);
                         }
-
-                         */
                         break;
                     case cardFabricationAndEnhancement:
+                        main_logger.info("Card enhancement and fabrication:");
                         System.out.println("This section has not yet been implemented");
                         followedPath.pop();
                         break ;
                     case wheelOfFortune:
+                        main_logger.info("Wheel of Fortune:");
                         System.out.println("This section has not yet been implemented.");
                         followedPath.pop();
                         break ;
                 }
 
             }
+        } catch (Exception e){
+            main_logger.info(e.getStackTrace().toString());
+            main_logger.info(e.getMessage());
         } finally {
             // Serialize USER if it is open
             main_logger.info("Exiting");

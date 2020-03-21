@@ -1,0 +1,16 @@
+Mar 21, 2020 6:33:48 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 6:33:53 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 6:33:55 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 6:34:00 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 6:34:00 PM Utility.SerializationFunctions userDeserialize
+INFO: User.User; local class incompatible: stream classdesc serialVersionUID = -4283121232160310657, local class serialVersionUID = -6103823479151167927
+Mar 21, 2020 6:34:00 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 6:34:06 PM CLI.CLI main
+INFO: No line found
+Mar 21, 2020 6:34:06 PM CLI.CLI main
+INFO: Exiting

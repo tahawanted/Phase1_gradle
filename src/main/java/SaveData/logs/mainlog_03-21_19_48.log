@@ -1,0 +1,78 @@
+Mar 21, 2020 7:48:46 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 7:48:53 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:48:55 PM CLI.CLI main
+INFO: Create user:
+Mar 21, 2020 7:49:00 PM User.createUser assignUserID
+INFO: Assigning userID 2
+Mar 21, 2020 7:49:00 PM User.createUser createAUser
+INFO: Creating user. Username: fatemeh
+Mar 21, 2020 7:49:00 PM User.createUser createAUser
+INFO: Creating user log
+Mar 21, 2020 7:49:00 PM User.createUser createAUser
+INFO: Creating user class instance
+Mar 21, 2020 7:49:00 PM User.createUser createAUser
+INFO: User class instantiated. Serializing
+Mar 21, 2020 7:49:00 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:49:00 PM CLI.CLI main
+INFO: The current Balance of the user 100
+Mar 21, 2020 7:49:00 PM CLI.CLI main
+INFO: Your current hero: Mage with hero level: 1
+Mar 21, 2020 7:49:00 PM CLI.CLI main
+INFO: The cards in your heroes deck:
+{
+  "Holy Fire": 2,
+  "Novice Engineer": 2,
+  "Regenerate": 2,
+  "Polymorph": 2,
+  "Lord of the Arena": 2,
+  "Arcane Missiles": 2,
+  "Shieldbearer": 2,
+  "Goldshire Footman": 2,
+  "Stonetusk Boar": 2,
+  "Raid Leader": 2
+}
+Mar 21, 2020 7:49:03 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:49:09 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:49:13 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:49:21 PM CLI.CLI inputGeneralCommandHandling
+INFO: Deck cards OK.
+Mar 21, 2020 7:49:21 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:49:24 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:49:28 PM User.User changeHero
+INFO: Successfully changed hero to Rogue
+Mar 21, 2020 7:49:28 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:49:28 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:49:30 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:49:32 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:49:35 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:50:48 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:50:56 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:51:01 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:51:11 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:51:11 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:51:16 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:52:11 PM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@6d8a00e3
+Mar 21, 2020 7:52:11 PM CLI.CLI main
+INFO: No line found
+Mar 21, 2020 7:52:11 PM CLI.CLI main
+INFO: Exiting

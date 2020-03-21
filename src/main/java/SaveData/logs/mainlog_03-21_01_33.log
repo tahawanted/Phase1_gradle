@@ -1,8 +1,0 @@
-Mar 21, 2020 1:34:01 AM User.PasswordUsername PasswordValidityCheck
-INFO: Checking password validity
-Mar 21, 2020 1:34:01 AM Utility.SerializationFunctions userDeserialize
-INFO: User object deserialized.
-Mar 21, 2020 1:34:01 AM CLI.CLI main
-INFO: User log in successful. Welcome
-Mar 21, 2020 1:34:33 AM CLI.CLI main
-INFO: Exiting

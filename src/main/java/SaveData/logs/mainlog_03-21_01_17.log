@@ -1,6 +1,0 @@
-Mar 21, 2020 1:17:42 AM User.PasswordUsername PasswordValidityCheck
-INFO: Checking password validity
-Mar 21, 2020 1:17:42 AM Utility.SerializationFunctions userDeserialize
-INFO: writing aborted; java.io.NotSerializableException: Hero.Powers$heroPowers
-Mar 21, 2020 1:17:42 AM Utility.SerializationFunctions userDeserialize
-INFO: User object deserialized.

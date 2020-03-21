@@ -1,7 +1,7 @@
 Username: Taha
 user ID: 1
 Password Hash:bcbc7dd0ee672c482f445f51b4c7bf7e35578f2782e5c06f3445003444316062
-Creation Time: 2020-03-21T12:59:30.901267100
+Creation Time: 2020-03-21T18:34:28.649033500
 Deleted At:
 
 
@@ -13,7 +13,99 @@ Deleted At:
 
 
 User logs:
-Mar 21, 2020 1:25:56 PM LoggingModule.LoggingClass getUserLogger
+Mar 21, 2020 6:40:33 PM LoggingModule.LoggingClass getUserLogger
 INFO: Instantiated current user's logger.
-Mar 21, 2020 1:25:56 PM User.UserFunctions userLogIn
+Mar 21, 2020 6:40:33 PM User.UserFunctions userLogIn
 INFO: Log in.
+Mar 21, 2020 6:40:37 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 6:40:40 PM CLI.CLI main
+INFO: Command: ls
+Mar 21, 2020 6:40:48 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 6:41:00 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 6:41:24 PM CLI.CLI main
+INFO: Command: listAddable
+Mar 21, 2020 6:41:32 PM CLI.CLI inputGeneralCommandHandling
+INFO: Command: help
+Mar 21, 2020 6:41:35 PM CLI.CLI main
+INFO: Command: listAll
+Mar 21, 2020 6:42:12 PM CLI.CLI main
+INFO: Navigation: store
+Mar 21, 2020 6:42:13 PM CLI.CLI main
+INFO: Command: ls
+Mar 21, 2020 6:42:22 PM CLI.CLI main
+INFO: Command: wallet
+Mar 21, 2020 6:43:09 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 6:43:29 PM CLI.CLI main
+INFO: Command chHero Warlock
+Successful.
+Mar 21, 2020 6:43:32 PM CLI.CLI main
+INFO: Command: ls
+Mar 21, 2020 6:43:46 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 6:43:48 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 6:43:58 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 6:44:01 PM CLI.CLI main
+INFO: Command chHero Mage
+Successful.
+Mar 21, 2020 6:44:16 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 6:44:38 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 6:45:19 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 6:45:23 PM CLI.CLI main
+INFO: Command chHero Mage
+Error. Hero already selected.
+Mar 21, 2020 6:45:31 PM CLI.CLI main
+INFO: Command chHero Rogue
+Successful.
+Mar 21, 2020 6:45:38 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 6:45:40 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 7:45:37 PM LoggingModule.LoggingClass getUserLogger
+INFO: Instantiated current user's logger.
+Mar 21, 2020 7:45:37 PM User.UserFunctions userLogIn
+INFO: Log in.
+Mar 21, 2020 7:45:43 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 7:45:59 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 7:46:04 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 7:47:31 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 7:47:35 PM CLI.CLI main
+INFO: Command chHero Mage
+Successful.
+Mar 21, 2020 7:47:41 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 7:47:44 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 7:47:50 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 7:47:55 PM CLI.CLI main
+INFO: Command chHero Warlock
+Successful.
+Mar 21, 2020 7:48:00 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 7:48:04 PM CLI.CLI main
+INFO: Command: listDeck
+Mar 21, 2020 7:48:11 PM CLI.CLI main
+INFO: Navigation: hero
+Mar 21, 2020 7:48:13 PM CLI.CLI main
+INFO: Command chHero 
+Error. Hero name incorrect.
+Mar 21, 2020 7:48:22 PM CLI.CLI main
+INFO: Command chHero Rogue
+Successful.
+Mar 21, 2020 7:48:31 PM CLI.CLI main
+INFO: Navigation: collection
+Mar 21, 2020 7:48:34 PM CLI.CLI main
+INFO: Command: listDeck

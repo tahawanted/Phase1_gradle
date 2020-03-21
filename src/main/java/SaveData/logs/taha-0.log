@@ -1,7 +1,7 @@
 Username: taha
 user ID: 0
 Password Hash:bcbc7dd0ee672c482f445f51b4c7bf7e35578f2782e5c06f3445003444316062
-Creation Time: 2020-03-21T10:58:47.771047900
+Creation Time: 2020-03-21T19:58:12.385034700
 Deleted At:
 
 
@@ -13,50 +13,3 @@ Deleted At:
 
 
 User logs:
-Mar 21, 2020 11:00:39 AM LoggingModule.LoggingClass getUserLogger
-INFO: Instantiated current user's logger.
-Mar 21, 2020 11:00:39 AM User.UserFunctions userLogIn
-INFO: Log in.
-Mar 21, 2020 11:00:44 AM CLI.CLI main
-INFO: Navigation: collection
-Mar 21, 2020 11:00:50 AM CLI.CLI main
-INFO: Command: listAddable
-Mar 21, 2020 11:01:29 AM LoggingModule.LoggingClass getUserLogger
-INFO: Instantiated current user's logger.
-Mar 21, 2020 11:01:29 AM User.UserFunctions userLogIn
-INFO: Log in.
-Mar 21, 2020 11:01:33 AM CLI.CLI main
-INFO: Navigation: collection
-Mar 21, 2020 11:01:38 AM CLI.CLI main
-INFO: Command: listAddable
-Mar 21, 2020 12:58:46 PM LoggingModule.LoggingClass getUserLogger
-INFO: Instantiated current user's logger.
-Mar 21, 2020 12:58:46 PM User.UserFunctions userLogIn
-INFO: Log in.
-Mar 21, 2020 12:59:39 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: help
-Mar 21, 2020 12:59:44 PM CLI.CLI main
-INFO: Navigation: collection
-Mar 21, 2020 12:59:49 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: help
-Mar 21, 2020 12:59:55 PM CLI.CLI main
-INFO: Command: listAddable
-Mar 21, 2020 12:59:58 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: help
-Mar 21, 2020 1:00:05 PM CLI.CLI main
-INFO: Command: listDeck
-Mar 21, 2020 1:00:27 PM CLI.CLI main
-INFO: Command: remove Novice Engineer
-Successful. Don't forget to add a card.
-Mar 21, 2020 1:00:32 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: back
-Error. Deck not at full capacity.
-Mar 21, 2020 1:00:39 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: help
-Mar 21, 2020 1:00:46 PM CLI.CLI main
-INFO: Command: listDeck
-Mar 21, 2020 1:01:13 PM CLI.CLI main
-INFO: Command: listAddable
-Mar 21, 2020 1:01:19 PM CLI.CLI inputGeneralCommandHandling
-INFO: Command: back
-Error. Deck not at full capacity.

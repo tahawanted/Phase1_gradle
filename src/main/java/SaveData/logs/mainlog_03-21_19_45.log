@@ -1,0 +1,86 @@
+Mar 21, 2020 7:45:26 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 7:45:30 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 7:45:32 PM CLI.CLI main
+INFO: Enter your credentials
+Mar 21, 2020 7:45:37 PM User.PasswordUsername PasswordValidityCheck
+INFO: Checking password validity
+Mar 21, 2020 7:45:37 PM CLI.CLI main
+INFO: User log in successful. Welcome
+Mar 21, 2020 7:45:37 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:45:43 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:45:48 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:45:59 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:46:01 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:46:04 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:47:22 PM CLI.CLI inputGeneralCommandHandling
+INFO: Deck cards OK.
+Mar 21, 2020 7:47:22 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:47:31 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:47:35 PM User.User changeHero
+INFO: Successfully changed hero to Mage
+Mar 21, 2020 7:47:35 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:47:35 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:47:38 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:47:41 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:47:44 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:47:48 PM CLI.CLI inputGeneralCommandHandling
+INFO: Deck cards OK.
+Mar 21, 2020 7:47:48 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:47:50 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:47:55 PM User.User changeHero
+INFO: Successfully changed hero to Warlock
+Mar 21, 2020 7:47:55 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:47:55 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:47:58 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:48:00 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:48:04 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:48:09 PM CLI.CLI inputGeneralCommandHandling
+INFO: Deck cards OK.
+Mar 21, 2020 7:48:09 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:48:11 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:48:13 PM User.User changeHero
+INFO: Error. The provided hero name is incorrect.
+Mar 21, 2020 7:48:13 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:48:22 PM User.User changeHero
+INFO: Successfully changed hero to Rogue
+Mar 21, 2020 7:48:22 PM Utility.SerializationFunctions Serialize
+INFO: Object has been serialized
+Mar 21, 2020 7:48:22 PM CLI.CLI main
+INFO: Hero:
+Mar 21, 2020 7:48:26 PM CLI.CLI main
+INFO: User panel:
+Mar 21, 2020 7:48:31 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:48:34 PM CLI.CLI main
+INFO: Collection:
+Mar 21, 2020 7:48:41 PM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@4520ebad
+Mar 21, 2020 7:48:41 PM CLI.CLI main
+INFO: No line found
+Mar 21, 2020 7:48:41 PM CLI.CLI main
+INFO: Exiting

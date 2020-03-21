@@ -88,30 +88,32 @@ public class PasswordUsername {
         }
         return true;
     }
-    public static void ChangePassword(String username, long userID, String currentPassword, String newPassword){
-        String passwordValidity = PasswordValidityCheck(username, userID, currentPassword);
-        if (passwordValidity.equals("Correct")){
-            JSONArray array = UserFunctions.getUserArray();
-            JSONObject user = UserFunctions.getUserFromArray(array, username, userID);
-            String oldLine = "Password:.*";
-            String newPasswordHash = null;
-            try {
-                newPasswordHash = HashLib.toHexString(HashLib.getSHA(newPassword));
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-                main_logger.info(e.getMessage());
-            }
-
-            String newLine = "Password: " + newPasswordHash;
-            Utility.FileFunctions.replaceLine(username, userID, oldLine, newLine);
-
-            user.remove("Password");
-            user.put("Password", newPasswordHash);
-            Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
-            main_logger.info("Password change successful.");
-        } else {
-            main_logger.info("Warning. Password incorrect. Password change failed.");
+    public static int ChangePassword(String username, long userID, String currentPassword, String newPassword, User currentUser){
+        if(!PasswordFormatCheck(newPassword)){
+            main_logger.info("Incorrect password format. " + passwordFormat);
+            return 405;
         }
+        JSONArray array = UserFunctions.getUserArray();
+        JSONObject user = UserFunctions.getUserFromArray(array, username, userID);
+        String oldLine = "Password:.*";
+        String newPasswordHash = null;
+        try {
+            newPasswordHash = HashLib.toHexString(HashLib.getSHA(newPassword));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            main_logger.info(e.getMessage());
+        }
+
+        String newLine = "Password: " + newPasswordHash;
+        Utility.FileFunctions.replaceLine(username, userID, oldLine, newLine);
+
+        user.remove("Password");
+        user.put("Password", newPasswordHash);
+        Utility.FileFunctions.saveJsonArray(array, Main_config_file.getUser_list_location());
+        currentUser.setHashedPassword(newPassword);
+        currentUser.serializeUser();
+        main_logger.info("Password change successful.");
+        return 200;
 
 
     }

@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 import static Utility.SerializationFunctions.Serialize;
 
 public class InitiateCards {
-    public static void main(String[] args) {
+    public static void InstantiateAllCards() {
+
         String []rarity = {"Common", "Rare", "Epic", "Legendary"};
         String []heroClass = {"Neutral", "Mage", "Rogue", "Warlock"};
         JSONArray cardArray = new JSONArray();

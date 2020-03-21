@@ -130,6 +130,7 @@ public class Hero implements Serializable {
             return 403;
         }
         deckCards.put(cardName, recurrence + 1);
+        currentNumberOfCardsInDeck += 1;
         return 200;
     }
     public int removeFromDeck(String cardName){
@@ -200,7 +201,7 @@ public class Hero implements Serializable {
             availableCards.add("Holy Fire");
             availableCards.add("Arcane Missiles");
 
-        } else if (name.equals("Rogou")){
+        } else if (name.equals("Rogue")){
             availableCards.add("Friendly Smith");
             availableCards.add("Goldshire Footman");
             availableCards.add("Twisting Nether");
@@ -261,10 +262,14 @@ public class Hero implements Serializable {
     public ArrayList<String> getAddableCards(){
         ArrayList<String> addableCards = new ArrayList<>(availableCards);
         ArrayList<String> cloneAddable = new ArrayList<>(addableCards);
-        for (String st:cloneAddable){
-            if ((int)deckCards.get(st) == maximumInstanceOfEachCard) {
-                addableCards.remove(st);
+        try {
+            for (String st : cloneAddable) {
+                if ((int) deckCards.get(st) == maximumInstanceOfEachCard) {
+                    addableCards.remove(st);
+                }
             }
+        } catch (Exception e){
+            e.getStackTrace();
         }
         return addableCards;
     }
