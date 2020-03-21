@@ -65,4 +65,6 @@ public class LoggingClass {
     public static Logger getMainLoggerInstance(){
         return main_logger;
     }
+
+
 }

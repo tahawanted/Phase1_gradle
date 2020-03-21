@@ -1,0 +1,8 @@
+Mar 21, 2020 9:02:17 PM CLI.CLI main
+INFO: Should the card objects be instantiated? Enter y if this is a first run or if the cards have changed. Else, enter n:
+Mar 21, 2020 9:02:52 PM CLI.CLI main
+INFO: Game Entry:
+Mar 21, 2020 9:02:56 PM CLI.CLI main
+INFO: [Ljava.lang.StackTraceElement;@1698c449
+Mar 21, 2020 9:02:56 PM CLI.CLI main
+INFO: No line found

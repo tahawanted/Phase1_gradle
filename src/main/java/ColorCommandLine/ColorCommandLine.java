@@ -1,6 +1,5 @@
-import LoggingModule.LoggingClass;
+package ColorCommandLine;
 
-import java.util.logging.Logger;
 // From https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 public class ColorCommandLine {
     // Reset
@@ -76,8 +75,4 @@ public class ColorCommandLine {
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
-    public static void main(String[] args) {
-        Logger mainLogger = LoggingClass.getMainLoggerInstance();
-        mainLogger.info(CYAN +"cyan" + RESET);
-    }
 }
